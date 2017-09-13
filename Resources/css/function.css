@@ -1,0 +1,142 @@
+﻿/* function */
+.f-cb:after,.f-cbli li:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
+.f-cb,.f-cbli li{zoom:1;}
+.f-ib{display:inline-block;*display:inline;*zoom:1;}
+.f-dn{display:none;}
+.f-db{display:block;}
+.f-fl{float:left;}
+.f-fr{float:right;}
+.f-pr{position:relative;}
+.f-pa{position: absolute;}
+.f-prz{position:relative;zoom:1;}
+.f-oh{overflow:hidden;}
+.f-ff0{font-family:arial,\5b8b\4f53;}
+.f-ff1{font-family:"Microsoft YaHei",\5fae\8f6f\96c5\9ed1,arial,\5b8b\4f53;}
+.f-fs1{font-size:12px;}
+.f-fs2{font-size:14px;}
+.f-fwn{font-weight:normal;}
+.f-fwb{font-weight:bold;}
+.f-tal{text-align:left;}
+.f-tac{text-align:center;}
+.f-tar{text-align:right;}
+.f-taj{text-align:justify;text-justify:inter-ideograph;}
+.f-vam,.f-vama *{vertical-align:middle;}
+.f-wsn{word-wrap:normal;white-space:nowrap;}
+.f-pre{overflow:hidden;text-align:left;white-space:pre-wrap;word-wrap:break-word;word-break:break-all;}
+.f-wwb{white-space:normal;word-wrap:break-word;word-break:break-all;}
+.f-ti{overflow:hidden;text-indent:-30000px;}
+.f-ti2{text-indent:2em;}
+.f-lhn{line-height:normal;}
+.f-lh30{line-height:30px;}
+.f-tdu,.f-tdu:hover{text-decoration:underline;}
+.f-tdn,.f-tdn:hover{text-decoration:none;}
+.f-toe{overflow:hidden;word-wrap:normal;white-space:nowrap;text-overflow:ellipsis;}
+.f-csp{cursor:pointer;}
+.f-csd{cursor:default;}
+.f-csh{cursor:help;}
+.f-csm{cursor:move;}
+.f-usn{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;}
+
+.f-w{letter-spacing: 26px;}
+.f-w1{letter-spacing: 8px;}
+.f-w2{letter-spacing: 2px;}
+.f-w3{letter-spacing: 3px;}
+.f-w5{letter-spacing: 5px;}
+.f-w6{letter-spacing: 6px;}
+.f-w12{letter-spacing: 12px;}
+.f-w11{letter-spacing: 11px;}
+.f-w0{letter-spacing: 1px;}
+.f-w40{letter-spacing: 40px;}
+
+
+.f-common{font-family: "microsoft yahei" ; color: #ffffff; }
+.f-cb-style{background: #FFFFFF; height: 2px;}
+.f-ic{color: #c2c5c7;}
+.f-top0{top:0;}
+.f-bottom50{bottom:50px;}
+.f-overflow-auto{overflow: auto;}
+
+
+.f-input-offset{margin-left: -3px;}
+.f-ic1{ display:inline-block;position: absolute; margin-top: 15px; margin-left: -22px;cursor: pointer;}
+
+/*padding*/
+.f-padding-bt50{padding-bottom: 35px;}
+.f-padding-left38{padding-left: 38px;}
+.f-padding-left20{padding-left: 20px;}
+.f-padding-right20{padding-right: 20px;}
+.f-pl60{padding-left: 60px;}
+.f-style-padding{padding:8px 30px 8px 10px;}
+.f-padding-bottom7{*padding-bottom: 7px;}
+.f-padding5{padding: 5px;}
+.f-padding10{padding: 10px 0;}
+.f-padding3-19{padding: 3px 19px;}
+.f-p20{padding: 0 20px;}
+
+/*margin*/
+.f-margin-top4f{margin-top: -4px;}
+.f-margin-top1f{margin-top: -1px;}
+.f-margin-left1{margin-left: -1px;}
+.f-margin-left30{margin-left:30px;}
+.f-mb95{margin-bottom: 95px;}
+.f-mt95{margin-top: 95px;}
+.f-mt12{margin-top: 12px;}
+.f-mt-3{margin-top: -3px;}
+.f-mb25{margin-bottom: 25px;}
+.f-mt25{margin-top: 25px;}
+.f-mt20{margin-top: 20px;}
+.f-mb35{margin-bottom: 35px;}
+.f-mt35{margin-top: 35px;}
+.f-mt1s{margin-top:-1px;}
+.f-ml50{margin-left: 50px;}
+.f-ml326{margin-left: 326px;}
+.f-ml15{margin-left: 15px;}
+.f-ml110{margin-left: 110px;}
+.f-ml150{margin-left: 150px;}
+.f-mr5{margin-right: 5px;}
+.f-mr10{margin-right: 10px;}
+.f-mr20{margin-right: 20px;}
+
+
+
+
+
+/*width*/
+.f-width110{display: inline-block;width: 110px}
+.f-width160{display: inline-block;width: 160px}
+.f-width80{display: inline-block;width: 80px;}
+.f-width90{display: inline-block;width: 90px;}
+.f-width180{display: inline-block;width: 180px;}
+.f-width200{display: inline-block;width: 200px;}
+
+/*line-height*/
+.f-lh28{line-height: 28px;}
+.f-lh45{line-height: 45px;}
+/*font*/
+.f-size14{font-size: 14px;}
+
+.f-w580{width: 580px;}
+
+.f-description{
+    font-size: 12px;
+    color: #808183;
+}
+/**vertical*/
+.f-vat{vertical-align: top;}
+
+.f-bgc{background-color: #f8f8f8;}
+.f-full-show{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.f-hide{
+    display: none;
+}
+
+.f-vh{
+    visibility: hidden;
+}

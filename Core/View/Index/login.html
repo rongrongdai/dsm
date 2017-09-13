@@ -1,0 +1,82 @@
+<?php
+if(!defined("WOWOSTAR"))exit;
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/index.css">
+<link rel="stylesheet" type="text/css" href="__STATIC__/css/function.css">
+<script src="__STATIC__/js/plugin/jquery-1.8.3.js"></script>
+<script src="__STATIC__/js/api.js"></script>
+<script src="__STATIC__/js/code.js"></script>
+<script src="__STATIC__/js/lang/zh-cn.js"></script>
+<script src="__STATIC__/js/plugin/layer/layer.min.js"></script>
+<script src="__STATIC__/js/plugin/jquery.form.js"></script>
+<script src="__STATIC__/js/plugin/validation/jquery.validate.js"></script>
+<script src="__STATIC__/js/plugin/validation/additional-methods.js"></script>
+<script src="__STATIC__/js/plugin/validation/localization/messages_zh.js"></script>
+<script src="__STATIC__/js/plugin/jquery.cookie.js"></script>
+<script src="__STATIC__/js/plugin/jquery.enplaceholder.js"></script>
+<title>帷幄技术安全平台-登录</title>
+<script>
+	var VERSION_MD5 = "{:md5($_SESSION['_SYSTEM_INFO']['VERSION_INFO'])}";
+</script>
+<script src="__STATIC__/js/module/login.js"></script>
+<style>
+    *{margin:0;padding:0;}
+    #bg{position:absolute;
+        top:0px;
+        left:0px;
+        z-index:-999;
+        bottom: 0px;
+    }
+    .img{position: fixed;top: 0px;left: 0px;bottom:0px;width: 100%;height: 100%;z-index: -99999;min-width: 1024px;min-height: 768px;}
+</style>
+
+</head>
+
+<body>
+<div class="g-doc-center">
+    <form onsubmit="return false;" id="u-login-form">
+        <div id="bg"><img src="__STATIC__/images/bg/bg_index.jpg" class="img">
+        </div>
+        <div class="u-mn-container" id="u-mn-container">
+            <ul>
+                <li  class="img-wh"><img src="__STATIC__/images/icon/index-logo.png"></li>
+                <li class="f-mt95" style="  font-family: 微软雅黑;font-size: 20px;color: white;letter-spacing: 2px;padding: 0 5px 5px 0px;">数据防泄漏系统 WO-DLP<!--<img src="__STATIC__/images/icon/login-word.png">--></li>
+                <li class="f-mt12">
+                    <input type="text" class="u-login-input" name="name" id="m-ipt-username"
+                           placeholder="请输入账号" required autocomplete="off" >
+                    <a class="u-login-del" id="removes"  style="display: none"></a>
+                    <a class="u-select" id="u-select"></a>
+                    <div class="u-select-menu f-dn" id="u-select-box">
+                    </div>
+                </li>
+                <li  class="f-mt20">
+                    <!--[if !IE]><!-->
+                    <input type="password" class="u-login-input" name="password" onfocus="this.type='password'" placeholder="请输入密码"
+                           autocomplete="off" id="u-password">
+                    <!--<![endif]-->
+                    <!--[if IE]>
+                    <input type="password" class="u-login-input" name="password" placeholder="请输入密码"
+                           autocomplete="off" id="u-password">
+                    <![endif]-->
+                </li>
+                <li class="f-mt20">
+                    <a class="u-login-btn" id="submit"></a>
+                </li>
+            </ul>
+        </div>
+    </form>
+</div>
+<div class="g-doc-bottom-container">
+    <div class="g-doc-bottom">
+        <span style="">当前版本:{$_SESSION['_SYSTEM_INFO']['VERSION_INFO']} | 帷幄技术版权所有©2012-2015 </span>
+        <span style=""></span>
+        <span style="margin-left: 350px;">
+        <a href="http://www.wowostar.com/product.php" target="_blank"> 产品介绍</a>  |  <a  href="http://www.wowostar.com/" target="_blank">客户服务</a>  |  <a  href="http://www.wowostar.com/" target="_blank">公司首页</a>  |  <a  href="http://www.wowostar.com/" target="_blank">意见反馈</a>  |  <a  href="http://www.wowostar.com/" target="_blank">帮助</a></span>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,448 @@
+<?php
+if(!defined("WOWOSTAR"))exit;
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <link rel="stylesheet" href="__STATIC__/css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/animation.css">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/public.css">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/theme/default.css">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/theme/icon.css">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/frame.css">
+    <link rel="stylesheet" href="__STATIC__/css/function.css"/>
+    <title>帷幄内网安全信息中心</title>
+    <script>
+        var IS_REG = "{$_SESSION['_SYSTEM_INFO']['IS_REG']}".length>0?true:false;
+    </script>
+    <!--引入js扩展包-->
+    <script src="__STATIC__/js/plugin/extend.js"></script>
+    <!--引入jQuery-->
+    <script src="__STATIC__/js/plugin/jquery-1.8.3.js"></script>
+    <!--依赖包-->
+    <script src="__STATIC__/js/plugin/jquery.hash.js"></script>
+    <script src="__STATIC__/js/plugin/jquery.json-2.2.js"></script>
+    <script src="__STATIC__/js/plugin/jquery.cookie.js"></script>
+    <script src="__STATIC__/js/plugin/jquery.form.js"></script>
+    <script src="__STATIC__/js/plugin/jquery.formautofill.js"></script>
+    <script src="__STATIC__/js/plugin/jquery.hotkeys.js"></script>
+    <script src="__STATIC__/js/plugin/layer/layer.min.js"></script>
+    <script src="__STATIC__/js/plugin/laydate/laydate.js"></script>
+    <script src="__STATIC__/js/plugin/validation/jquery.validate.js"></script>
+    <script src="__STATIC__/js/plugin/validation/additional-methods.js"></script>
+    <script src="__STATIC__/js/plugin/validation/localization/messages_zh.js"></script>
+    <script src="__STATIC__/js/plugin/ajaxfileupload.js"></script>
+    <script src="__STATIC__/js/plugin/jquery.enplaceholder.js"></script>
+    <script src="__STATIC__/js/plugin/jquery.zclip.js"></script>
+    <script src="__STATIC__/js/code.js"></script>
+    <!--引入框架-->
+    <script src="__STATIC__/js/frame.js"></script>
+    <!--与后台交换api-->
+    <script src="__STATIC__/js/api.js"></script>
+    <!--语言包-->
+    <script src="__STATIC__/js/lang/zh-cn.js"></script>
+    <!--引入主页面-->
+    <script src="__STATIC__/js/run.js"></script>
+    <!--[if gte IE 9]>
+    <style type="text/css">
+        .gradient {
+            filter: none;
+        }
+    </style>
+    <![endif]-->
+</head>
+<body>
+<div class="container">
+<!--version 5.2-->
+<div class="g-hd s-hd">
+<div class="m-top-left">
+    <a href="" class="u-top-logo s-top-logo"></a>
+</div>
+<div class="m-top-center">
+    <div class="m-nav-title">
+        <ul id="u-nav">
+            <?php
+            $menu=array(
+                array("id"=>"user","auth"=>"UserPageView","img"=>"__STATIC__/images/icon/users.png","title"=>"用户管理"),
+                array("id"=>"strategy","auth"=>"StrategyPageView","img"=>"__STATIC__/images/icon/strategy.png","title"=>"策略管理"),
+                array("id"=>"role","auth"=>"RolePageView","img"=>"__STATIC__/images/icon/role.png","title"=>"角色管理"),
+                array("id"=>"setting","auth"=>"SettingPageView","img"=>"__STATIC__/images/icon/setting.png","title"=>"系统配置"),
+                array("id"=>"log","auth"=>"LogPageView","img"=>"__STATIC__/images/icon/nav_log.png","title"=>"日志审计")
+            );
+            $first = 0;
+            foreach($menu as $k=>$v)
+            {
+                //判断是否有无权限
+                if(!hasRight($v['auth']))
+                {
+                    continue;
+                }
+                //style="margin-left: 1px;"
+                //导航模板
+                $temp = '<li style="float: left">'.
+                    '<a class="u-nav-item" data-id="%1$s" id="u-nav-item" %2$s>'.
+                    '<img src="%3$s" id="img-title" class="ie-img" >'.
+                    '<span>%4$s</span>'.
+                    '</a>'.
+                    '</li>';
+                $style="";
+                if($first==0)
+                {
+                    $style = 'style="margin-left: 0px;"';
+                    $first++;
+                }
+                else
+                {
+                    $style = 'style = "margin-left:-1px;"';
+                    $first++;
+                }
+                echo sprintf($temp,$v['id'],$style,$v['img'],$v['title']);
+            }
+            ?>
+
+        </ul>
+    </div>
+</div>
+<div class="m-top-right" >
+    <div class="m-top-input">
+        <input class="u-top-search1 " id="u-search-condition"  style="background-position-x:90%; ">
+        <input type="text"  id="u-search-input" placeholder="请输入搜索内容" class="u-top-search" autocomplete="off">
+        <i id="u-search-icon" class="u-top-icon-search s-top-icon-search"></i>
+    </div>
+    <a class="s-top-role u-top-role" id="u-top-role"></a>
+
+</div>
+<!--关于我们-->
+<div class="m-top-drop s-top-drop" style="display: none" id="m-top-drop">
+    <ul class="u-top-drop-ul">
+        <li style="color: #232323;"><?php echo $_SESSION['_USER_INFO']['LoginName'];?></li>
+        <div style="width: 76px ;height: 1px; background-color: #e2dede;margin-left: 3px;"></div>
+        <li><a class="u-top-drop-a" href="http://www.wowostar.com" target="_blank">公司主页</a></li>
+
+        <?php
+        //有权限才显示这段功能
+        $regLi ='<li><a class="u-top-drop-a"  id="reg-manage" >注册管理</a></li>'.
+            '<li><a class="u-top-drop-a" id="drop-manage">卸载管理</a></li>';
+        if(hasRight("SettingPageEditAll"))
+        {
+            echo $regLi;
+        }
+        ?>
+        <li><a class="u-top-drop-a" id="update-pws">修改密码</a></li>
+        <li><a class="u-top-drop-a" id="software-upgrade">软件升级</a></li>
+        <li><a class="u-top-drop-a" href="./Help/WOWO文档安全管理系统V5.2用户手册V1.0.pdf" target="_blank">帮助中心</a></li>
+        <li><a class="u-top-drop-a" id="sys-about">关于</a></li>
+        <li><a class="u-top-drop-a" id="u-do-logout">退出</a></li>
+    </ul>
+</div>
+<!--注册面板-->
+<div id="reg-manage-box" style="display:none">
+    <div class="u-reg-manage s-reg-manage" id="reg-manage-title">
+            <span>
+            <img src="__STATIC__/images/icon/reg-manage.png" class="u-upload-img1">
+            </span>
+    </div>
+    <div>
+        <div class="u-reg-main-text f-mtb23">
+            <form enctype="multipart/form-data">
+                <ul class="u-reg-ul">
+                    <li>
+                        <label>
+                            <span style="letter-spacing: 4px;">公司名称</span><span style="display: inline-block;margin-left: -2px;">：</span>
+                            <input type="text" class="u-panel-reg-input" id="u-reg-company-name-input" name="company"></label>
+                        <input type="button" class="u-upload-btn-view" id="u-make-reg-code" value="生成机器码">
+                    </li>
+                    <li>
+                        <label>
+                            <span class="">导入授权码</span><span>：</span>
+                            <input class="u-panel-reg-input" type="text" id="u-license-file-input" readonly="readonly">
+                            <input type="file" class="f-dn" id="u-select-license-file" name="licenseFile">
+                        </label>
+                        <input type="button" class="u-upload-btn-view" id="u-select-license-file-btn" value="浏 览">
+                    </li>
+
+                </ul></form>
+        </div>
+        <div class="u-upload-bottom " style="width: 460px;">
+            <input type="button" id="u-reg-system-btn" class="btn u-upload-btn u-upload-btn-submit" value="注 册"/>
+            <input type="button" value="取 消" class="u-upload-btn u-upload-btn-reset"  id="u-back-reg-box-btn">
+        </div>
+
+    </div>
+
+    <div class="s-bottom-bg u-bottom-bg">
+        <span class="f-ml15">主页:</span><a href="http://www.wowostar.com" target="_blank" class="s-c">http://www.wowostar.com</a>
+        <span class="f-ml150">服务: 4007779688</span>
+    </div>
+</div>
+<!--注册信息面板-->
+<div id="reg-manage-box-msg" style="display:none">
+    <div class="u-reg-manage s-reg-manage" id="reg-manage-title1">
+            <span>
+            <img src="__STATIC__/images/icon/reg-manage.png" class="u-upload-img1">
+            </span>
+    </div>
+    <div>
+        <div class="u-reg-main-text">
+            <ul class="f-ml110 u-reg-ul" style="line-height:34px;">
+                <li>
+                    <span style="letter-spacing: 6px;">公司名称</span><span>：</span><span id="u-reg-info-company-name"><?php echo $_SESSION['_SYSTEM_INFO']['COMPANY_NAME']; ?></span>
+                </li>
+                <li>
+                    <span style="letter-spacing: 6px;">到期时间</span><span>：</span><span><b id="u-reg-info-expiration-date"><?php echo $_SESSION['_SYSTEM_INFO']['EXPIRATION_DATE']; ?></b> 天</span>
+                </li>
+                <li>
+                    <span style="letter-spacing: 1px;">最大用户数</span><span style="display: inline-block;margin-left: 5px;">：</span><span><b id="u-reg-info-max-user-num"><?php echo $_SESSION['_SYSTEM_INFO']['MAX_CLIENT']; ?></b> 台</span>
+                </li>
+                <li>
+                    <span style="letter-spacing: 1px;">是否适用</span><span style="display: inline-block;margin-left: 5px;">：</span><span><?php echo $_SESSION['_SYSTEM_INFO']['IS_TRIAL_NAME']; ?></span>
+                </li>
+            </ul>
+        </div>
+        <div class="u-upload-bottom " style="width: 460px;">
+            <input type="button" id="reg-comp" class="btn u-upload-btn u-upload-btn-submit" value="重新注册"/>
+            <input type="button" value="取 消" class="u-upload-btn u-upload-btn-reset cancel-btn">
+        </div>
+
+    </div>
+
+    <div class="s-bottom-bg u-bottom-bg">
+        <span class="f-ml15">主页:</span><a href="http://www.wowostar.com" target="_blank" class="s-c">http://www.wowostar.com</a>
+        <span class="f-ml150">服务: 4007779688</span>
+    </div>
+</div>
+<!--卸载面板-->
+<div id="drop-manage-box" style="display:none">
+    <div class="u-reg-manage s-reg-manage" id="drop-manage-title1">
+            <span>
+            <img src="__STATIC__/images/icon/unload-manage.png" class="u-upload-img1">
+            </span>
+    </div>
+    <div>
+        <div class="u-reg-main-text">
+            <form>
+                <ul class="u-reg-ul">
+                    <li>
+                        <label>
+                            <span class="">客户端机器码</span><span>：</span>
+                            <input type="text" class="u-panel-reg-input" id="u-client-machine-code">
+                        </label>
+                    </li>
+                    <li>
+                        <span style="letter-spacing: 9px;">失效时间</span><span style="display:inline-block;margin-left: -8px;margin-right: -1px;">：</span>
+                        <span id="u-uninstall-timeout"></span>
+                    </li>
+                    <li>
+                        <label>
+                            <span>客户端卸载码</span><span>：</span>
+                            <input class="u-panel-reg-input" type="text" id="u-client-uninstall-code">
+                        </label>
+                        <input type="button" class="u-upload-btn-view" id="u-copy-client-uninstall-code" value="复 制">
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <div class="u-upload-bottom " style="width: 460px;">
+            <input type="button" id="u-make-uninstall-btn" class="btn u-upload-btn u-upload-btn-submit" value="制 作"/>
+            <input type="button" value="取 消" class="u-upload-btn u-upload-btn-reset cancel-btn">
+        </div>
+
+    </div>
+
+    <div class="s-bottom-bg u-bottom-bg">
+        <span class="f-ml15">主页:</span><a href="http://www.wowostar.com" target="_blank" class="s-c">http://www.wowostar.com</a>
+        <span class="f-ml150">服务: 4007779688</span>
+    </div>
+</div>
+<!--修改密码-->
+<div id="update-pws-box" style="display:none">
+    <div class="u-reg-manage s-reg-manage" id="update-pws-title1">
+            <span>
+            <img src="__STATIC__/images/icon/update-pws.png" class="u-upload-img1">
+            </span>
+    </div>
+    <div>
+        <div class="u-reg-main-text">
+            <form id="u-edit-pwd-form">
+                <ul class="u-reg-ul">
+                    <li>
+                        <label>
+                            <span class="">输入旧密码</span><span>：</span>
+                            <input type="password" class="u-panel-reg-input" name="oldPwd" required>
+                        </label>
+                    </li>
+                    <li>
+                        <span>输入新密码</span><span>：</span>
+                        <input type="password" class="u-panel-reg-input" name="newPwd" required id="u-self-new-pwd">
+                    </li>
+                    <li>
+                        <label>
+                            <span>确认新密码</span><span>：</span>
+                            <input class="u-panel-reg-input" type="password" name="newPwd2" required equalTo="#u-self-new-pwd">
+                        </label>
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <div class="u-upload-bottom " style="width: 460px;">
+            <input type="button" class="btn u-upload-btn u-upload-btn-submit" id="u-submit-edit-pwd-form-btn" value="确 定"/>
+            <input type="button" value="取 消" class="u-upload-btn u-upload-btn-reset cancel-btn">
+        </div>
+
+    </div>
+
+    <div class="s-bottom-bg u-bottom-bg">
+        <span class="f-ml15">主页:</span><a href="http://www.wowostar.com" target="_blank" class="s-c">http://www.wowostar.com</a>
+        <span class="f-ml150">服务: 4007779688</span>
+    </div>
+</div>
+</div>
+
+<!--version 5.2-->
+<!--头部-->
+<!-- <div class="g-hd s-hd">
+    <div class="u-top1">
+         <div class="m-logo">
+             <a><img src="images/logo.png"></a>
+         </div>
+         <div class="m-out">
+             <a href="/Logout.php" class="m-out-a1"><span>安全退出</span></a>
+         </div>
+    </div>
+     <div class="m-line s-line"></div>
+     <div class="m-massage">
+         <span class="u-hello">你好！</span>
+         <span class="u-name">登陆时间:<span  id="u-txt-login-time">2014年5月20日13:15:20</span></span>
+         <span class="u-name">当前时间:<span  id="u-txt-crt-time">2014年5月20日13:15:20</span></span>
+         <span class="u-name u-color">软件版本为：Ver:5.2 Build 0809 授权版</span>
+     </div>
+     <div class="m-nav s-nav">
+         <div class="m-nav-title">
+             <ul id="u-nav">
+                 <li>
+                     <a class="u-nav-item" data-id="user" id="u-nav-item">
+                         <img src="images/nav_user.png" id="img-title">
+                         <span>用户管理</span>
+                     </a>
+                 </li>
+                 <li>
+                     <a class="u-nav-item" data-id="strategy">
+                         <img src="images/nav_strategy.png">
+                         <span>策略管理</span>
+                     </a>
+                 </li>
+                 <li>
+                     <a class="u-nav-item" data-id="role">
+                         <img src="images/nav_role.png">
+                         <span>角色管理</span>
+                     </a>
+                 </li>
+                 <li>
+                     <a class="u-nav-item" data-id="setting">
+                         <img src="images/nav_setting.png">
+                         <span>系统管理</span>
+                     </a>
+                 </li>
+                 <li>
+                     <a class="u-nav-item" data-id="log">
+                         <img src="images/nav_log.png">
+                         <span>日志审计</span>
+                     </a>
+                 </li>
+             </ul>
+         </div>
+         <div class="m-nav-search">
+             <input type="text" placeholder="请输入关键字搜索" id="u-search-input" class="u-search s-search f-fs2">
+             <a id="u-search-icon"><img src="images/nav_help.png" class="u-nav-img"><span class="u-help">帮助</span></a>
+         </div>
+     </div>
+ </div>-->
+<!--头部-->
+
+
+<div id="main-container">
+    <!--左侧栏-->
+    <!--<div class="g-sd s-sd" id="menu-container">
+        <ul>
+            <li><a class="u-lev1  s-lev1"><img src="images/left_imgOne.png">研发策略</a>
+                <ul>
+                    <li><a class="u-lev2 s-lev2 f-common">设计类策略</a></li>
+                    <li><a class="u-lev2 s-lev2 f-common">应用类策略</a></li>
+                    <li><a class="u-lev2 s-lev2 f-common">项目类策略</a>
+                        <ul>
+                            <li>
+                                <a class="f-common u-lev3 s-lev3">白盒测试</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a class="u-lev1  s-lev1"><img src="images/left_imgOne.png">研发策略</a>
+                <ul>
+                    <li><a class="u-lev2 s-lev2 f-common">设计类策略</a></li>
+                    <li><a class="u-lev2 s-lev2 f-common">应用类策略</a></li>
+                    <li><a class="u-lev2 s-lev2 f-common">项目类策略</a>
+                        <ul>
+                            <li>
+                                <a class="f-common u-lev3 s-lev3">白盒测试</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a class="u-lev1  s-lev1"><img src="images/left_imgOne.png">研发策略</a>
+                <ul>
+                    <li><a class="u-lev2 s-lev2 f-common">设计类策略</a></li>
+                    <li><a class="u-lev2 s-lev2 f-common">应用类策略</a></li>
+                    <li><a class="u-lev2 s-lev2 f-common">项目类策略</a>
+                        <ul>
+                            <li>
+                                <a class="f-common u-lev3 s-lev3">白盒测试</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>-->
+    <!--左侧栏-->
+    <!--右侧栏-->
+    <!--<div class="g-mn">
+    </div>-->
+    <!--右侧栏-->
+</div>
+<!--<div class="g-sd-version f-dn">
+    <span>软件版本为：<?php /*echo $GLOBALS['_VERSION']; */?></span>
+</div>-->
+</div>
+<div id="u-about-box" style="display:none">
+    <div class="u-reg-manage s-reg-manage" id="u-about-top">
+            <span>
+            <img src="__STATIC__/images/icon/about.png" class="u-upload-img1">
+            </span>
+    </div>
+    <div>
+        <div class="u-reg-main-text">
+            <ul class="u-about-version">
+                <li>
+                    <span>软件版本为：<?php echo $_SESSION['_SYSTEM_INFO']['VERSION_INFO']; ?></span>
+                </li>
+
+                <li>
+                    <span>帷幄技术 版权所有</span>
+                </li>
+                <li>
+                    <span>Copyright @ 2012-2024 wowostar Inc. All Rights Reserved</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="s-bottom-bg u-bottom-bg">
+        <span class="f-ml15">主页:</span><a href="http://www.wowostar.com" target="_blank" class="s-c">http://www.wowostar.com</a>
+        <span class="f-ml150">服务: 4007779688</span>
+    </div>
+</div>
+</body>
+</html>

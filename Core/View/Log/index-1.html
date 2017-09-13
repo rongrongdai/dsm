@@ -1,0 +1,123 @@
+<?php
+if(!defined("WOWOSTAR"))exit;
+Common::widget("Body")->commonHeader();
+Common::widget("Body")->commonTopMenu();
+?>
+<script>
+    window.LIMIT_CONTROLLER={
+        "EDIT":"{:hasRight('LogPageEdit')}",
+        "EDIT_ALL":"{:hasRight('LogPageEditAll')}",
+        "IS_ADMIN":"{:isAdmin()}"
+    };
+</script>
+<link rel="stylesheet" href="__STATIC__/js/plugin/daterangepicker/daterangepicker.css" />
+<script src="__STATIC__/js/plugin/daterangepicker/moment.min.js"></script>
+<script src="__STATIC__/js/plugin/daterangepicker/jquery.daterangepicker.js"></script>
+
+<script src="__STATIC__/js/module/log.js"></script>
+<div class="m-content">
+<!--左侧栏-->
+<div class="g-sd s-sd u-ajax-tree s-ajax-tree z-generated z-isLoaded" id="menu-container-log">
+    <ul>
+        <li>
+            <a class="u-ajax-tree-item u-ajax-tree-root s-ajax-tree-root icon-user-lv1 z-isLoaded u-log-item client"
+               style="padding-left: 20px;" data-group="client">
+                <!--<i class="icon-img"></i>-->
+                <img src="__STATIC__/images/icon/icon-log-lv1.png" class="u-log-left-img">
+                <span class="u-ajax-tree-text">客户端日志</span>
+            </a>
+        </li>
+        <li>
+            <a class="u-ajax-tree-item u-ajax-tree-root s-ajax-tree-root icon-user-lv1 z-isLoaded u-log-item process"
+               style="padding-left: 20px;"  data-group="process">
+                <!--<i class="icon-img"></i>-->
+                <img src="__STATIC__/images/icon/icon-log-lv1.png" class="u-log-left-img">
+                <span class="u-ajax-tree-text">流程日志</span>
+            </a>
+        </li>
+        <li>
+            <a class="u-ajax-tree-item u-ajax-tree-root s-ajax-tree-root icon-user-lv1 z-isLoaded u-log-item admin"
+               style="padding-left: 20px;" data-group="admin">
+                <!--<i class="icon-img"></i>-->
+                <img src="__STATIC__/images/icon/icon-log-lv1.png" class="u-log-left-img">
+                <span class="u-ajax-tree-text">管理员日志</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<!--左侧栏-->
+<!--右侧栏-->
+<div class="g-mn">
+<!--内部部分的头部工具-->
+<div class="m-mn-top s-mn-top f-padding-bottom7" >
+    <div class="m-log-top">
+            <!--<span class="u-log-span1">
+            &lt;!&ndash; <span class="u-log-world">起始</span>&ndash;&gt;
+             <span><input type="text" class="u-panel-input11 u-log-date-select f-style-padding" id="u-log-date-start" readonly="readonly" placeholder="开始时间"></span>
+            </span>
+            <span class="u-log-span2" >
+                <i class="s-log-arrow u-log-arrow"></i>
+            </span>
+            <span class="u-log-span1">
+                &lt;!&ndash;<span class="u-log-world">结束</span>&ndash;&gt;
+                <span><input type="text" class="u-panel-input11 u-log-date-select f-style-padding" id="u-log-date-end"  readonly="readonly" placeholder="结束时间"></span>
+            </span>-->
+            <span class="u-log-span1">
+                <input type="text" class="u-panel-input11 f-style-padding" id="inner-search" placeholder="模糊搜索">
+            </span>
+            <div class="u-log-span1">
+                <input type="text" class="u-panel-input11 u-log-date-select f-style-padding" id="u-log-date"  readonly placeholder="日期筛选">
+            </div>
+            <span class="u-log-span2">
+                <a class="u-btn-ok2 s-btn-ok2" id="u-btn-filter-by-date">搜 索</a>
+            </span>
+        <!--<span class="u-log-span1">
+            <span class="u-log-world">操作设置</span>
+                <span>
+                    <select class="u-main-toolbar-select f-style-padding" id="u-btn-operate-content" style="display: block;width: 180px;margin: 0 auto; *height: 30px;">
+                        <option value="backup">备份</option>
+                    </select>
+                </span>
+            </span>-->
+             <span class="u-log-span2">
+                <a class="u-btn-ok2 s-btn-ok2" id="u-btn-operate">导 出</a>
+            </span>
+    </div>
+</div>
+<div class="m-content-container" id="m-content-container-log">
+    <div class="m-content-item m-content-item-list client f-dn">
+        <div class="u-ajax-table-container" id="u-ajax-table-container-client"></div>
+        <div class="u-page-toolbar" id="u-page-toolbar-client">
+            <?php
+                Common::widget("Page")->pageToolbar();
+            ?>
+        </div>
+    </div>
+    <div class="m-content-item m-content-item-list process f-dn">
+        <div class="u-ajax-table-container" id="u-ajax-table-container-process"></div>
+        <div class="u-page-toolbar" id="u-page-toolbar-process">
+            <?php
+              Common::widget("Page")->pageToolbar();
+            ?>
+        </div>
+    </div>
+    <div class="m-content-item m-content-item-list admin f-dn">
+        <div class="u-ajax-table-container" id="u-ajax-table-container-admin"></div>
+        <div class="u-page-toolbar" id="u-page-toolbar-admin">
+            <?php
+              Common::widget("Page")->pageToolbar();
+            ?>
+        </div>
+    </div>
+</div>
+</div>
+
+<form class="f-dn" method="post" action="" id="export-excel" target="_blank">
+    <input type="hidden" name="EXPORT" value="true"/>
+    <input type="hidden" name="EXPORT_DATA" id="export-excel-data" value=""/>
+    <input type="hidden" name="TotalCount" id="export-excel-total" value=""/>
+</form>
+<!--右侧栏--></div>
+<?php
+Common::widget("Body")->commonFooter();
+?>

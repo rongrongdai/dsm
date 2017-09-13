@@ -1,0 +1,423 @@
+<?php
+if(!defined("WOWOSTAR"))exit;
+   Common::widget("Body")->commonHeader();
+Common::widget("Body")->commonTopMenu();
+?>
+<script>
+    window.LIMIT_CONTROLLER={
+        "EDIT":"{:hasRight('UserPageEdit')}",
+        "EDIT_ALL":"{:hasRight('UserPageEditAll')}",
+        "IS_ADMIN":"{:isAdmin()}"
+    };
+</script>
+<script src="__STATIC__/js/module/user.js"></script>
+<script src="__STATIC__/js/plugin/binfu/collapsePanel.js"></script>
+<div class="u-dept-float-btn u-dept-float-btn-add u-users-tree-add"></div>
+<div class="u-dept-float-btn u-dept-float-btn-edit u-users-tree-edit"></div>
+<div class="u-dept-float-btn u-dept-float-btn-del u-users-tree-del"></div>
+<div class="m-content">
+<!--左侧栏menu-container-user-->
+<div class="g-sd s-sd" >
+    <div id="menu-container-user"></div>
+</div>
+
+<!--左侧栏-->
+<!--右侧栏-->
+<div class="g-mn">
+<!--内部部分的头部工具-->
+<div class="m-mn-top">
+        <table class="u-panel-table-top" id="u-main-toolbar-user">
+            <tr class="u-panel-table-top-tr">
+                <td>
+                    <a class="u-main-toolbar-btn <?php disable('UserPageEditAll'); ?>" data-group="add-user" id="add-user">
+                        <i class="icon-add icon-common"></i>
+                        <span class="pl-panel f-w0">新增</span>
+                    </a>
+                </td>
+                <td class="f-margin-left1">
+                    <a class="u-main-toolbar-btn <?php disable('UserPageEdit'); ?>" data-group="edit-user" id="edit-user">
+                        <i class="icon-edit icon-common"></i>
+                        <span class="pl-panel f-w0">编辑</span>
+                    </a>
+                </td>
+                <td class="f-margin-left1">
+                    <a class="u-main-toolbar-btn <?php disable('UserPageEditAll'); ?>" data-group="edit-dept" id="frozen-user">
+                        <i class="icon-blocking icon-common"></i>
+                        <span class="pl-panel f-w0" id="u-btn-txt-frozen-user">停用</span>
+                    </a>
+                </td>
+                <td class="f-margin-left1">
+                    <a class="u-main-toolbar-btn <?php disable('UserPageEditAll'); ?>"  id="del-user">
+                        <i class="icon-del icon-common"></i>
+                        <span class="pl-panel f-w0">删除</span>
+                    </a>
+                </td>
+            </tr>
+            <tr class="u-panel-table-top-tr">
+                <td>
+                    <a class="u-main-toolbar-btn <?php disable('UserPageEditAll'); ?>" id="import">
+                        <i class="icon-import "></i>
+                        <span class="f-w0">导入</span>
+                    </a>
+                </td>
+                <td class="f-margin-left1">
+                    <a class="u-main-toolbar-btn" id="u-export-user">
+                        <i class="icon-export "></i>
+                        <span class="f-w0">导出</span>
+                    </a>
+                </td>
+            </tr>
+        </table>
+</div>
+<!--内部部分的头部工具-->
+<!--主题内容-->
+<div class="m-content-container" id="m-content-container-user">
+<!--用户主页列表-->
+<div class="m-content-item m-content-item-list">
+    <div class="u-ajax-table-container" id="u-ajax-table-container-user"></div>
+    <div class="u-page-toolbar" id="u-page-toolbar-user">
+        {~Common::widget("Page")->pageToolbar()}
+    </div>
+</div>
+<!--用户主页列表-->
+<!--新增部门-->
+<div class="m-content-item m-content-item-form-dept-add f-dn" data-group="add-dept">
+    <form id="u-form-add-dept">
+        <div class="m-content-item-wrapper">
+            <!--常规设置-->
+            <div class="s-panel u-panel">
+                <div class="u-panel-title s-panel-title">
+                    <span class="u-panel-title-son z-expanded">常规设置</span>
+                    <b class="icon-tab-right"></b>
+                </div>
+                <div class="u-panel-body">
+                    <div class="u-panel-item1 s-panel-item1">
+
+                        <ul class="u-add-user-dept-ul">
+                            <li>
+                                <label>
+                                    <span class="u-add-user-dept-li f-word-margin">部门名称</span>
+                                    <input type="text" class="u-panel-input" id="u-name" name="GroupName" required maxlength="35" commonStr="commonStr">
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <span class="u-add-user-dept-li">部门隶属</span>
+                                    <input type="hidden" name="bShouldCreateDeletedUserGroup" id="bShouldCreateDeletedUserGroup" value="0" disableclear="true"/>
+                                    <input type="text" class="u-panel-input" name="ParentGroupGuid" id="AddGroupParentGroupGuid" required/>
+                                    <!--<input type="text" class="u-panel-input" id="u-belong" readonly="readonly" >-->
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <span class="u-add-user-dept-li">部门类型</span>
+                                    <input type="text" class="u-panel-input GroupType" name="GroupType" id="group-type-add" required/>
+                                    <!--<select class="u-input-option" name="GroupType">
+                                        <option value="0">普通组</option>
+                                        <option value="1">继承组</option>
+                                    </select>-->
+                                </label>
+                            </li>
+                            <li><label><span class="u-add-user-dept-li f-w12">备注:</span>
+                                    <input class="u-panel-input" id="u-remarks" name="GroupDescript"/></label>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <!--成员设置-->
+            </div>
+            <div class="s-panel u-panel">
+                <div class="u-panel-title s-panel-title">
+                    <span class="u-panel-title-son z-expanded">添加成员</span>
+                    <b class="icon-tab-right"></b>
+                </div>
+                <div class="u-panel-body">
+                    <div class="u-panel-item1 s-panel-item1">
+                        <ul class="u-add-user-dept-ul">
+                            <li>
+                                <div class="u-panel-item1">
+                                    <div class="u-add-doing-user">
+                                        <div style="display: inline-block;"><span id="u-should-add-user">可添加成员</span>
+                                            <input type="text" class="u-users-add-dept-search1 f-dn" id="u-select-search-user-input">
+                                        </div>
+                                        <a class="u-user-dept-emp-more" id="u-user-dept-emp-more">更多</a>
+                                        <a class="u-users-add-dept-search" id="u-select-search-user"></a>
+                                        <select class="u-panel-area1" multiple="multiple" size="2" id="u-dept-user-add-1">
+                                        </select>
+                                    </div>
+                                    <div class="u-add-opt">
+                                        <a class="s-img1 u-img1 u-move-user-right"></a>
+                                        <a class="s-img2 u-img2 u-move-user-left"></a>
+                                    </div>
+                                    <div class="u-add-did-user">
+                                        <span>已添加成员</span>
+                                        <select multiple="multiple" size="2" class="u-panel-area1" id="u-dept-user-add-2" name="Users[]"></select>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+</div>
+<!--新增部门-->
+<!--编辑部门-->
+<div class="m-content-item m-content-item-form-dept-edit f-dn" data-group="edit-dept">
+    <form id="u-form-edit-dept"><div class="m-content-item-wrapper">
+            <div class="s-panel u-panel">
+                <div class="u-panel-title s-panel-title">
+                    <span class="u-panel-title-son z-expanded">常规设置</span>
+                    <b class="icon-tab-right"></b>
+                </div>
+                <div class="u-panel-body">
+                    <div class="u-panel-item1 s-panel-item1">
+                        <ul class="u-add-user-dept-ul">
+                            <li><label><span class="u-add-user-dept-li ">部门名称</span>
+                                    <input type="text" class="u-panel-input"  name="GroupName" required  maxlength="35" commonStr="commonStr">
+                                    <input type="hidden" name="Modify_Guid" />
+                                </label>
+                            </li>
+                            <li><label><span class="u-add-user-dept-li">部门类型</span>
+                                    <input type="text" class="u-panel-input GroupType" name="GroupType" id="group-type-edit" required/>
+                                    <!--<select class="u-input-option" name="GroupType">
+                                        <option value="0">普通组</option>
+                                        <option value="1">继承组</option>
+                                    </select>-->
+                                </label></li>
+                            <li><label><span class="u-add-user-dept-li f-w12">备注:</span>
+                                    <input class="u-panel-input" id="u-remarks1" name="GroupDescript"/></label></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div></form>
+</div>
+<!--编辑部门-->
+<!--添加员工-->
+<div class="m-content-item m-content-item-form-user-add f-dn" data-group="add-user">
+    <form id="u-form-add-user">
+        <div class="m-content-item-wrapper">
+            <div class="s-panel u-panel">
+                <div class="u-panel-title s-panel-title">
+                    <span class="u-panel-title-son z-expanded">基本信息</span>
+                    <b class="icon-tab-right"></b>
+                </div>
+                <div class="u-panel-body">
+                    <div class="u-panel-item1 s-panel-item1">
+                        <ul class="u-panel-ul1">
+                            <li><label for="u-users-emp1" ><span class="f-w">账号</span></label><input type="text" id="u-users-emp1" class="u-panel-input1" name="Adduser_UserName" required  maxlength="35" commonStr2="true"><a class="f-remark" id="f-remark" style="margin-left: 13px;font-size:12px;">(创建多个用户)</a></li>
+                            <li><label for="u-users-emp2"><span class="f-w1">用户名</span></label><input type="text" id="u-users-emp2" class="u-panel-input1" name="Adduser_DisplayName" required  maxlength="35" commonStr2="true"></li>
+                            <li>
+                                <label for="u-users-emp3">
+                                    <span class="f-w">密码</span>
+                                </label><!--[if !IE]><!--><input type="text" onfocus="this.type='password'" autocomplete="off" id="u-users-emp3" class="u-panel-input1" name="Adduser_Password" required>
+                                <!--<![endif]--><!--[if IE]><input type="password" autocomplete="off" id="u-users-emp3" class="u-panel-input1" name="Adduser_Password" required>
+                                <![endif]-->
+                            </li>
+                            <li>
+                                <label for="u-users-emp4">确认密码</label><!--[if !IE]><!--><input type="text" onfocus="this.type='password'" autocomplete="off" id="u-users-emp4" class="u-panel-input1" equalTo="#u-users-emp3">
+                                <!--<![endif]--><!--[if IE]><input type="password" autocomplete="off" id="u-users-emp4" class="u-panel-input1" equalTo="#u-users-emp3">
+                                <![endif]-->
+                            </li>
+                            <li>
+                                <label for="Adduser_ParentGuid"><span class="f-w">部门</span></label>
+                                <input type="text" class="u-panel-input1 f-input-offset" id="Adduser_ParentGuid" name="Adduser_ParentGuid" required/>
+                                <span class="f-description" style="margin-left: 10px;">(多选部门进行挂接)</span>
+                            </li>
+                            <li>
+                                <label for="AddUserRole">
+                                    <span class="f-w">角色</span>
+                                </label>
+                                <input type="hidden" id="AddUserRoleJson" name="RoleID"/>
+                                <input type="text" class="u-panel-input1 f-input-offset" id="AddUserRole" name="AddUserRole"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div></form>
+</div>
+<!--添加员工-->
+<!--编辑员工-->
+<div class="m-content-item m-content-item-form-user-edit f-dn" data-group="edit-user">
+    <form id="u-form-edit-user"><div class="m-content-item-wrapper">
+            <div class="s-panel u-panel">
+                <div class="u-panel-title s-panel-title">
+                    <span class="u-panel-title-son z-expanded">常规设置</span>
+                    <b class="icon-tab-right"></b>
+                </div>
+                <div class="u-panel-body">
+                    <div class="u-panel-item1 s-panel-item1">
+                        <ul class="u-users-ul2">
+                            <li><label><span class="u-add-user-dept-li f-w1">用户名 </span>
+                                    <input type="text" class="u-panel-input1" id="u-users-edit-emp1" name="DisplayName" required  maxlength="35" commonStr2="true"></label>
+                                <input type="hidden" name="guid" id="user-guid">
+                                <input type="hidden" name="loginname" id="user-loginname">
+                            </li>
+                            <li><label><span class="u-add-user-dept-li">修改密码 </span>
+                                    <input type="password" autocomplete="off" class="u-panel-input1"  name="Password"></label>
+                            </li>
+                            <li>
+                                <label><span class="u-add-user-dept-li ">部门名称</span>
+                                    <input type="text" class="u-panel-input1" id="edit-user-group" name="group" required/>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <span class="u-add-user-dept-li f-w">角色 </span>
+                                    <input type="hidden" id="EditUserRoleJson" name="RoleID"/>
+                                    <input type="text" class="u-panel-input1" id="EditUserRole" name="EditUserRole"/>
+                                </label>
+                            </li>
+                            <li>
+                                <a class="<?php hide('UserPageEditAll')?> u-btn-off-file" id="off-file"><!--生成离线授权文件--></a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div></form>
+</div>
+<!--编辑员工-->
+<!--主题内容-->
+<div class="m-btn f-dn">
+    <a class="u-btn-ok s-btn-ok <?php disable('UserPageEdit'); ?>" id="u-btn-ok-user">确 定</a>
+    <a class="u-btn-cancel s-btn-cancel">取 消</a>
+</div>
+</div>
+
+</div>
+<!--右侧栏--></div>
+
+<!--导入box-->
+<div id="upload-box" style="display:none">
+    <form method="post" enctype="multipart/form-data" id="upload-form">
+        <div class="u-upload" id="import-box-title">
+            <span>
+            <img src="__STATIC__/images/version1/icon-upload.png" class="u-upload-img1"><span class="u-file-upload-tab">导 入</span>
+            </span>
+        </div>
+        <div class="u-file-upload" >
+            <div class="u-upload-file-name">
+                <ul class="u-upload-ul">
+                    <li>
+                        <span class="u-imp-box-title">导入类型：</span>
+                        <label class="u-panel-label"><input type="radio" name="import_type" checked id="sel-file-import" value="1" class="f-vam f-ib f-mr5"><span>文件导入</span></label>
+                        <label><input type="radio" name="import_type" id="domain-import" value="2" class="f-vam f-ib f-mr5"><span>域导入</span></label>
+                    </li>
+                    <li>
+                        <span class="u-imp-box-title">导入归属：</span>
+                        <input type="text" class="u-upload-input u-padding sel-group import">
+                        <span class="f-description">（请选择需要导入的组织或部门）</span>
+                    </li>
+                    <li id="sel-file-box">
+                        <span class="u-imp-box-title f-w5">文件名：</span>
+                        <input type="text" class="u-upload-input" id="import-file-name" readonly="readonly" style="margin-left: -1px;">
+                        <input type="button" value="浏 览" class="u-upload-btn-view" id="upload-view-btn">
+                        <input type="file" name="file" class="file" id="fileField"  style="display: none"/>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="u-upload-bottom">
+                <input type="button" id="import-btn" class="btn u-upload-btn u-upload-btn-submit" value="导 入"/>
+                <input type="button" value="取 消" class="u-upload-btn u-upload-btn-reset u-cancel-import">
+            </div>
+
+        </div>
+
+    </form>
+</div>
+<!--/ 导入box-->
+
+<!--导出box-->
+<div id="export-box" style="display:none">
+    <form  method="post" enctype="multipart/form-data" id="export-user-form">
+        <div class="u-upload" id="export-box-title">
+            <span class="u-tab-top-upload">
+            <img src="__STATIC__/images/version1/icon_upload.png" class="u-upload-img1"><span class="u-file-upload-tab">导 出</span>
+            </span>
+        </div>
+        <div class="u-file-upload" >
+            <div class="u-upload-file-name">
+                <ul class="u-upload-ul">
+                    <li>
+                        <span style="margin-left: 90px;">导出归属：</span>
+                        <input type="text" class="u-upload-input u-padding sel-group export">
+                    </li>
+                    <li>
+                        <span class="f-description" style="margin-left: 90px;">备注：请选择需要导出的组织或部门</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="u-upload-bottom">
+                <input type="button" id="export-btn" class="btn u-upload-btn u-upload-btn-submit" value="导 出"/>
+                <input type="button" value="取 消" class="u-upload-btn u-upload-btn-reset cancel-btn">
+            </div>
+        </div>
+
+    </form>
+</div>
+<!--/ 导出box-->
+
+
+<!--生成离线授权文件-->
+<div id="off-box" class="u-font-sign f-dn">
+    <form id="u-form-check-off-file" method="post" action="">
+        <div id="off-box-title" class="u-upload f-w580" >
+        <span class="u-off-title">
+            <img src="__STATIC__/images/version1/off-set.png" class="u-off-img"><span class="u-off-file">生成离线授权文件</span>
+        </span>
+        </div>
+        <div>
+            <div>
+                <ul class="u-upload-ul1">
+                    <li>
+                        <span>离线时间：</span>
+                        <input name="OffStart" required type="text" class="u-off-input u-off-other " id="off-upload-file-time-start" readonly="readonly"/><!--<i class="laydate-icon f-ic1" id="off-upload-file-time-start"></i>-->
+                        <img src="__STATIC__/images/icon_time_to.png" style="display: inline-block;vertical-align: middle;">
+                        <input name="OffEnd"  type="text" class="u-off-input " id="off-upload-file-time-end" required readonly="readonly"/><!--<i class="laydate-icon f-ic1" id="off-upload-file-time-end"></i>-->
+                    </li>
+                    <li>
+                        <span>有效时长：</span>
+                        <input name="OffTime" required type="number" min="10" class="u-upload-input" id="u-time-long" max="43200"><span>分钟</span>
+                    </li>
+                    <li>
+                        <span>密码输入：</span>
+                        <input name="OffPwd" required type="password" autocomplete="off" class="u-upload-input" id="check-off-file-psw" />
+                    </li>
+                    <li>
+                        <span class="u-upload-file-title ">密码确认：</span>
+                        <input name="OffPwd2" required equalTo="#check-off-file-psw" type="password" autocomplete="off" class="u-upload-input" id="check-off-file-psw1"  />
+                    </li>
+                </ul>
+            </div>
+            <div class="u-upload-bottom1">
+                <input type="button" id="export-off-btn" class="btn u-upload-btn u-upload-btn-submit" value="生 成"/>
+                <input type="button" id="cancel-off-btn" value="取 消" class="u-upload-btn u-upload-btn-reset">
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="u-input-dept-root f-dn" id="u-input-dept-root">
+    <form id="u-input-dept-root-form" onsubmit="return false;">
+        <div class="u-input-dept-root-title">
+            <span>请输入集团或公司名称</span>
+        </div>
+        <input class="u-input-dept-root-input" id="u-input-dept-root-input" placeholder="请输入集团或公司名称" required commonStr="commonStr" maxlength="32"/>
+        <input type="button" id="u-save-dept-root-btn" class="u-upload-btn" style="position:absolute;left: 60px;top: 110px;" value="保 存"/>
+        <input type="button" id="u-import-user-group-btn" class="u-upload-btn" style="position:absolute;left: 165px;top: 110px;" value="导 入"/>
+    </form>
+</div>
+
+<?php
+Common::widget("Body")->commonFooter();
+?>

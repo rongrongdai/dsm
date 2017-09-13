@@ -1,0 +1,104 @@
+<form method="post" id="workmode-form" onsubmit="return false;" autocomplete="off">
+    <div class="m-panel s-panel">
+        <div class="m-panel-title s-panel-title">
+            <span class="u-panel-title-son">常规设置</span>
+            <b class="icon-tab-right"></b>
+        </div>
+        <div class="m-panel-body">
+            <div class="m-panel-item s-panel-item">
+                <div class="u-setting4">
+                    <ul class="u-setting-li">
+                        <li>
+                            <label><span class="u-business-span-width f-w" style="letter-spacing: 53px;">角色名称</span>
+                                {~ if(!empty($data)){ }
+                                <input type="text" class="u-panel-input1" value="{$RoleName}" readonly >
+                                <input type="hidden" name="RoleID" value="{$data.RoleID}"/>
+                                <input type="hidden" name="IsEdit" value="yes"/>
+                                {~}else{ }
+                                <input type="text" class="u-panel-input1" name="RoleID" id="u-role-select" required>
+                                <input type="hidden" name="IsEdit" value="no"/>
+                                {~} }
+                            </label>
+                        </li>
+                        <li>
+                                    <span class="u-business-span-width">工作模式切换</span>
+                                    <input type="checkbox" class="js-switch" id="Forbidden" name="Forbidden" value="1" {: $data[Forbidden]?'checked':'' } />
+                        </li>
+                        <li>
+                                    <span class="u-business-span-width" style="letter-spacing: 9px;">行为管控</span>
+                                    <input type="checkbox" class="js-switch" id="EnableActCtrl" name="EnableActCtrl" value="1" {: $data[EnableActCtrl]?'checked':'' } />
+                        </li>
+                        <li>
+                            <span class="u-business-span-width" style="letter-spacing: 9px;">重复周期</span>
+                            <label>
+                                <input type="radio" class="f-ib f-vam f-padding5" name="RepeatDaySwitch" value="everyday" {: $everyday?'checked':'' } />
+                                <span class="f-ib f-vam f-padding5">每天</span>
+                            </label>
+                            <label class="f-margin-left30">
+                                <input type="radio" class="f-ib f-vam f-padding5" name="RepeatDaySwitch" value="custom" {: $everyday?'':'checked' } />
+                                <span class="f-ib f-vam f-padding5">自定义</span>
+                            </label>
+                        </li>
+                        <li class="u-repeat-day f-hide" id="repeat-day-list">
+                            <label style="margin-left: 105px;">
+                                <input type="checkbox"  name="RepeatDay" value="Monday" {: $data[Monday]?'checked':'' } />
+                                <span>周一</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" name="RepeatDay" value="Tuesday" {: $data[Tuesday]?'checked':'' } />
+                                <span>周二</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" name="RepeatDay" value="Wednesday" {: $data[Wednesday]?'checked':'' } />
+                                <span>周三</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" name="RepeatDay" value="Thursday" {: $data[Thursday]?'checked':'' } />
+                                <span>周四</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" name="RepeatDay" value="Friday" {: $data[Friday]?'checked':'' } />
+                                <span>周五</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" name="RepeatDay" value="Saturday" {: $data[Saturday]?'checked':'' } />
+                                <span>周六</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" name="RepeatDay" value="Sunday" {: $data[Sunday]?'checked':'' } />
+                                <span>周日</span>
+                            </label>
+                        </li>
+                        <li>
+                            <span class="u-business-span-width" style="letter-spacing: 9px;">生效时段</span>
+                            <label>
+                                <input type="radio" class="f-ib f-vam f-padding5" name="RepeatTimeSwitch" value="24" {: $is24?'checked':'' } />
+                                <span class="f-ib f-vam f-padding5">24小时</span>
+                            </label>
+                            <label style="padding-left: 14px;">
+                                <input type="radio" class="f-ib f-vam f-padding5" name="RepeatTimeSwitch" value="custom" {: $is24?'':'checked' } />
+                                <span class="f-ib f-vam f-padding5">自定义</span>
+                            </label>
+                            <ol class="work-time-list f-hide" id="work-time-list">
+                                {~ foreach($timeList as $k=>$v){ }
+                                {~$time=time()}
+                                <li>
+                                    <span class="f-padding5 range-title">时段{$k+1}</span><input type="text" class="date-time" data-name="StartTime" readonly data-field="time"  data-max-target="{$time}" value="{$v.StartTime}"/>
+                                    <span class="f-padding5">至</span>
+                                    <input type="text" class="date-time" data-name="EndTime" readonly data-field="time"  data-target="{$time}"  value="{$v.EndTime}"/>
+                                    <i class="icon-tool icon-tool-del"></i>
+                                    <i class="icon-tool icon-tool-add"></i>
+                                </li>
+                                {~}}
+                            </ol>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="m-btn">
+    <a class="u-btn-ok s-btn-ok {~disable('SettingPageEdit')}" id="save-workmode">保 存</a>
+    <a class="u-btn-cancel s-btn-cancel {~disable('SettingPageEditAll')}">取 消</a>
+</div>

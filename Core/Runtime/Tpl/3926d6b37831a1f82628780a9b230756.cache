@@ -1,0 +1,66 @@
+<?php
+if(!defined("WOWOSTAR"))exit;
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <!--360双核浏览器识别-->
+    <meta name="renderer" content="webkit">
+    <!--强制IE浏览器不使用兼容性视图-->
+    <meta http-equiv="X-UA-Compatible" content="edge" />
+    <link rel="stylesheet" href="/Resources/css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="/Resources/css/animation.css">
+    <link rel="stylesheet" type="text/css" href="/Resources/css/public.css">
+    <link rel="stylesheet" type="text/css" href="/Resources/css/theme/default.css">
+    <link rel="stylesheet" type="text/css" href="/Resources/css/theme/icon.css">
+    <link rel="stylesheet" type="text/css" href="/Resources/css/frame.css">
+    <link rel="stylesheet" href="/Resources/css/function.css"/>
+    <!--<link rel="stylesheet" href="/Resources/js/plugin/layer/skin/layer.css"/>
+    <link rel="stylesheet" href="/Resources/js/plugin/layer/skin/layer.ext.css"/>-->
+    <title>帷幄内网安全信息中心</title>
+    <script>
+        var IS_REG = "<?php echo $_SESSION['_SYSTEM_INFO']['IS_REG']; ?>".length>0?true:false;
+    </script>
+    
+    <!--引入jQuery-->
+    <script src="/Resources/js/plugin/jquery-1.8.3.js"></script>
+    <!--依赖包-->
+    <script src="/Resources/js/plugin/jquery.hash.js"></script>
+    <script src="/Resources/js/plugin/jquery.json-2.2.js"></script>
+    <script src="/Resources/js/plugin/jquery.cookie.js"></script>
+    <script src="/Resources/js/plugin/jquery.form.js"></script>
+    <script src="/Resources/js/plugin/jquery.formautofill.js"></script>
+    <!-- <script src="/Resources/js/plugin/jquery.hotkeys.js"></script> -->
+    <script src="/Resources/js/plugin/layer/layer.min.js"></script>
+    <script src="/Resources/js/plugin/laydate/laydate.js"></script>
+    <script src="/Resources/js/plugin/validation/jquery.validate.js"></script>
+    <script src="/Resources/js/plugin/validation/additional-methods.js"></script>
+    <script src="/Resources/js/plugin/validation/localization/messages_zh.js"></script>
+    <script src="/Resources/js/plugin/ajaxfileupload.js"></script>
+    <script src="/Resources/js/plugin/jquery.enplaceholder.js"></script>
+    <script src="/Resources/js/plugin/jquery.zclip.js"></script>
+    <script src="/Resources/js/plugin/jquery.mousewheel.js"></script>
+    <script src="/Resources/js/code.js"></script>
+    <!--引入框架-->
+    <script src="/Resources/js/frame.js"></script>
+    <script src="/Resources/js/plugin/binfu/ajaxTable.js"></script>
+    <script src="/Resources/js/plugin/binfu/ajaxTree.js"></script>
+    <script src="/Resources/js/plugin/binfu/ajaxTreeSelect.js"></script>
+    <script src="/Resources/js/plugin/binfu/ajaxPanel.js"></script>
+    <!--与后台交互api-->
+    <script src="/Resources/js/api.js"></script>
+    <!--语言包-->
+    <script src="/Resources/js/lang/zh-cn.js"></script>
+    <!--引入主页面-->
+    <script src="/Resources/js/run.js"></script>
+
+    <!--[if gte IE 9]>
+    <style type="text/css">
+        .gradient {
+            filter: none;
+        }
+    </style>
+    <![endif]-->
+</head>
+<body>

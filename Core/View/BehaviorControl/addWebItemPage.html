@@ -1,0 +1,10 @@
+<?php foreach($data as $v){ ?>
+<li data-name="{$v.WebPageName}" data-url="{$v.WebPageAddr}" data-icon="{$v.WebPageKey}" data-img="__NO_FIS_STATIC__/images/website_icon/{$v.WebPageKey}.png">
+    <a class="u-view-limit">
+        <i class="web-img web-img-msg" style="background-image: url('__NO_FIS_STATIC__/images/website_icon/{$v.WebPageKey}.png')">
+            <em class="icon-min-choose"></em>
+        </i>
+        <p class="tab-content-control">{$v.WebPageName}</p>
+    </a>
+</li>
+<?php } ?>

@@ -1,0 +1,117 @@
+<form method="post"  onsubmit="return false;">
+    <input name="PolicyType" value="1" type="hidden"/>
+    <div class="m-panel s-panel">
+        <div class="m-panel-title s-panel-title">
+            <span class="u-panel-title-son">基本信息</span>
+            <b class="icon-tab-right"></b>
+        </div>
+        <div class="m-panel-body">
+            <div class="m-panel-item s-panel-item">
+                <div class="u-setting4">
+                    <ul class="u-setting-li">
+                        <li>
+                            <label><span class="u-business-span-width f-w1">策略名称</span>
+                                <input type="text" class="u-panel-input1" name="PolicyName" required commonStr="commonStr" value="{$data.PolicyName}"></label>
+                        </li>
+                        <li>
+                            <label><span class="u-business-span-width f-w1">策略描述</span>
+                                <input type="text" class="u-panel-input1" name="PolicyDescribe" required commonStr="commonStr" value="{$data.PolicyDescribe}"></label>
+                        </li>
+                        <li>
+                            <span class="u-business-span-width f-w1">列表类型</span>
+                                <label class="f-mr20"><input type="radio" name="IsBlackPolicy" class="f-input-align" value="1" checked >
+                                    黑名单</label>
+                                <label><input type="radio" name="IsBlackPolicy" class="f-input-align" value="0">
+                                    白名单</label>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-panel s-panel">
+        <div class="m-panel-title s-panel-title">
+            <span class="u-panel-title-son">账号控制</span>
+            <b class="icon-tab-right"></b>
+        </div>
+        <div class="m-panel-body">
+            <div class="m-panel-item s-panel-item">
+                <div class="m-tab">
+                    <div class="m-tab-main">
+                        <ul class="m-tab-all">
+                            <li >
+                                <a > Q Q </a>
+                                <div  class="triangle-panel-control">
+                                    <ul class="f-fl f-ib">
+                                        <li class="f-fl f-ib u-add-item-btn" data-id="qq" data-key="QQAcountList" data-icon="web-img-msg-qq">
+                                            <a  class="u-view-limit">
+                                                <i class="web-img web-img-add"></i>
+                                                <p class="tab-content-control">添加</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li><!--
+                            <li >
+                                <a > Skype </a>
+                                <div  class="triangle-panel-control">
+                                    <ul class="f-fl f-ib">
+                                        <li class="f-fl f-ib u-add-item-btn" data-id="skype"  data-key="SkypeAcountList"  data-icon="web-img-msg-skype">
+                                            <a  class="u-view-limit">
+                                                <i class="web-img web-img-add" id="u-choose-item-btn"></i>
+                                                <p class="tab-content-control">添加</p>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </li>-->
+                            <li >
+                                <a > 阿里旺旺 </a>
+                                <div  class="triangle-panel-control">
+                                    <ul class="f-fl f-ib">
+                                        <li class="f-fl f-ib u-add-item-btn" data-id="aliww"  data-key="AliAcountList" data-icon="web-img-msg-wang">
+                                            <a  class="u-view-limit">
+                                                <i class="web-img web-img-add"></i>
+                                                <p class="tab-content-control">添加</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!--新增页面-->
+<div id="add-window-box" style="display:none">
+    <div class="m-panel-pop-window" id="add-window-title">
+            <span class="u-add-window-title1">
+            <img src="__STATIC__/images/icon/icon-add-window.png" class="u-add-window-title-img">
+            </span>
+        <span class="u-add-window-title2">添加账号</span>
+    </div>
+    <div style="min-height: 190px;">
+        <form enctype="multipart/form-data"  onsubmit="return false;">
+            <div class="u-account-add">
+                <label>
+                    <span>账号</span><span style="display: inline-block;margin-left: -2px;">：</span>
+                    <input type="text" class="u-panel-reg-input"  name="name">
+                </label>
+            </div>
+        </form>
+    </div>
+        <div class="m-panel-pop-bottom-btn " style="width: 460px;">
+            <input type="button"  class="btn u-upload-btn u-upload-btn-submit submit-btn" value="添加"/>
+            <input type="button" value="取 消" class="u-upload-btn u-upload-btn-reset cancel-btn">
+        </div>
+
+</div>
+<div class="m-btn">
+    <a class="u-btn-ok s-btn-ok <?php disable('BehaviorControlPageEdit'); ?>">确 定</a>
+    <a class="u-btn-cancel s-btn-cancel">取 消</a>
+</div>

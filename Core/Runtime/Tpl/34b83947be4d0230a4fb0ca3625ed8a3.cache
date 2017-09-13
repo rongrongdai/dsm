@@ -1,0 +1,10 @@
+<?php foreach($data as $v){ ?>
+<li data-name="<?php echo (is_array($v)?$v["WebPageName"]:$v->WebPageName); ?>" data-url="<?php echo (is_array($v)?$v["WebPageAddr"]:$v->WebPageAddr); ?>" data-icon="<?php echo (is_array($v)?$v["WebPageKey"]:$v->WebPageKey); ?>" data-img="/Resources/images/website_icon/<?php echo (is_array($v)?$v["WebPageKey"]:$v->WebPageKey); ?>.png">
+    <a class="u-view-limit">
+        <i class="web-img web-img-msg" style="background-image: url('/Resources/images/website_icon/<?php echo (is_array($v)?$v["WebPageKey"]:$v->WebPageKey); ?>.png')">
+            <em class="icon-min-choose"></em>
+        </i>
+        <p class="tab-content-control"><?php echo (is_array($v)?$v["WebPageName"]:$v->WebPageName); ?></p>
+    </a>
+</li>
+<?php } ?>

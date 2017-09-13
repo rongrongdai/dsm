@@ -1,0 +1,33 @@
+<?php
+if(!defined("WOWOSTAR"))exit;
+?>
+<?php if($showCheckbox){ ;?>
+<div class="u-page-toolbar-deselect-all">
+    <input type="checkbox" class="u-page-toolbar-btn-inverse-select" id="u-page-toolbar-btn-inverse-select-user"/>
+    <label style=" padding-left:5px; vertical-align:top" for="u-page-toolbar-btn-inverse-select-user">反选</label>
+</div>
+<?php };?>
+<div class="u-page-toolbar-rows"><select class="u-page-toolbar-rows-select">
+        <!--<option value="">默认</option>-->
+        <option value="15" <?php echo $row==15?"selected":"";?> >15</option>
+        <option value="50" <?php echo $row==50?"selected":"";?> >50</option>
+        <option value="100" <?php echo $row==100?"selected":"";?> >100</option>
+        <option value="200" <?php echo $row==200?"selected":"";?> >200</option>
+        <option value="500" <?php echo $row==500?"selected":"";?> >500</option>
+    </select></div>
+<div class="u-page-toolbar-info">
+    <div class="s-page-toolbar-select-page">
+    </div>
+    <a class="u-page-toolbar-btn-first s-page-toolbar-btn-first"></a>
+    <a  class="u-page-toolbar-btn-prev s-page-toolbar-btn-prev"></a>
+                <span class="f-ib f-vam">
+                第 <input type="text" value="1" class="u-page-toolbar-num-p-current" /> 页/共<span class="u-page-toolbar-num-p-total"></span>  页
+                </span>
+    <a class="u-page-toolbar-btn-next s-page-toolbar-btn-next"></a>
+    <a  class="u-page-toolbar-btn-end s-page-toolbar-btn-end"></a>
+    <a  class="u-page-toolbar-btn-reload s-page-toolbar-btn-reload"></a>
+</div>
+<div class="u-page-toolbar-log">显示
+    <span class="u-page-toolbar-num-start"></span>到
+    <span  class="u-page-toolbar-num-end"></span>，
+    共<span  class="u-page-toolbar-num-total"></span>记录</div>

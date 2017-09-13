@@ -1,0 +1,52 @@
+<?php
+/**
+ * Author: HongBinfu 
+ * Date: 14-9-2
+ * Time: 上午10:27
+ */
+return array(
+    array("AddUserGroup"=>"添加用户组"),
+    array("EditUserGroup"=>"编辑用户组"),
+    array("DelUserGroup"=>"删除用户组"),
+    array("ImportUserGroup"=>"导入用户组"),
+    array("ExportUserGroup"=>"导出用户组"),
+    array("AddUser"=>"添加用户"),
+    array("EditUser"=>"编辑用户"),
+    array("DisableUser"=>"冻结用户"),
+    array("DelUser"=>"删除用户"),
+    array("UserPageView"=>"用户界面查看"),
+    array("UserPageEdit"=>"用户界面修改"),
+    array("UserPageEditAll"=>"用户界面完全控制"),
+    array("AddStrategyGroup"=>"新增策略组"),
+    array("EditStrategyGroup"=>"编辑策略组"),
+    array("DelStrategyGroup"=>"删除策略组"),
+    array("AddStrategy"=>"新增策略"),
+    array("EditStrategy"=>"编辑策略"),
+    array("DelStrategy"=>"删除策略"),
+    array("ImportStrategy"=>"导入策略"),
+    array("ExportStrategy"=>"导出策略"),
+    array("StrategyPageView"=>"策略界面查看"),
+    array("StrategyPageEdit"=>"策略界面修改"),
+    array("StrategyPageEditAll"=>"策略界面完全控制"),
+    array("AddRole"=>"添加角色"),
+    array("EditRole"=>"编辑角色"),
+    array("DelRole"=>"删除角色"),
+    array("ImportRole"=>"导入角色"),
+    array("exportRole"=>"导出角色"),
+    array("RolePageView"=>"角色界面查看"),
+    array("RolePageEdit"=>"角色界面修改"),
+    array("RolePageEditAll"=>"角色界面完全控制"),
+    array("BusinessSetting"=>"业务配置"),
+    array("LogSetting"=>"日志配置"),
+    array("ProcessSetting"=>"流程配置"),
+    array("OtherSetting"=>"其他配置"),
+    array("SettingPageView"=>"系统设置界面查看"),
+    array("SettingPageEdit"=>"系统设置界面修改"),
+    array("SettingPageEditAll"=>"系统设置界面完全控制"),
+    array("ClientLog"=>"客户日志"),
+    array("ProcessLog"=>"流程日志"),
+    array("AdminLog"=>"管理员日志"),
+    array("LogPageView"=>"日志界面查看"),
+    array("LogPageEdit"=>"日志界面修改"),
+    array("LogPageEditAll"=>"日志界面完全控制")
+);

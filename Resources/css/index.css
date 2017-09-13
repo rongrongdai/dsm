@@ -1,0 +1,194 @@
+/* CSS Document */
+body{ font-size:12px; line-height:22px; color:#383838; font-family:"Microsoft Yahei";overflow-x: auto;overflow-y:hidden;}
+html, body, div, h1, h2, h3, h4, h5, h6, ul, ol, dl, li, dt, dd, p, blockquote, pre, form, fieldset, table, th, td, span, input, textarea { margin:0; padding:0; }
+
+/*wrap*/
+/*.g-doc{
+    position: absolute;
+	background-image: url('../images/back.jpg');
+	background-repeat: no-repeat;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background-position: right top;
+}*/
+/*body{background-color: #02276e;}*/
+html, body, div, h1, h2, h3, h4, h5, h6, ul, ol, dl, li, dt, dd, p, blockquote, pre, form, fieldset, table, th, td, span, input, textarea {
+
+margin: 0;
+padding: 0;
+}
+li{list-style: none;}
+/*
+
+.g-doc-head{
+	height: 350px;
+	position: relative;
+	top: 300px;
+	overflow: hidden;
+}
+.m-left{
+	width: 500px;
+height: 200px;
+float: right;
+position: absolute;
+top: 0px;
+right: 150px;
+	}
+.m-ipt{ overflow:hidden; padding-top:40px;}
+.m-ipt li{ padding:5px;}
+.m-ipt .m-ipt-account{
+    width: 200px;
+    display: inline-block;
+    font-size: 14px;
+    padding: 8px 10px;
+    vertical-align: middle;
+    border: 1px solid #cccccc;
+    margin-left: 5px;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+}
+.m-btn-user{ position:absolute; right:7px; top:52px; cursor:pointer;width:50px; height:34px; z-index:20; background:url(../images/icon1.png) no-repeat right center;}
+
+.m-ipt-select-user{ position:absolute; top:52px; }
+.m-ipt-select-user li{ list-style-type:none;
+    background:#fff;
+    cursor:pointer;
+    width:200px;
+    height:34px;
+    position:relative;
+    top:34px;
+    border-bottom-width:2px;
+    border-bottom-color:#666666;
+    font-size:14px;
+    z-index:20;}
+.m-ipt-select-user li:hover{
+text-decoration:none;
+color:#93c3cd;
+background:#ccc;
+}
+ .m-btn-service{ position:absolute; right:7px; top:144px; cursor:pointer;width:50px; height:34px; background:url(../images/icon1.png) no-repeat right center;}
+
+.m-ipt-select-service{ position:absolute; top:144px; }
+.m-ipt-select-service li{ list-style-type:none; background:#fff; cursor:pointer; width:200px; height:34px; position:relative; top:34px;
+    border-bottom-width:2px; border-bottom-color:#666666; font-size:14px; z-index:20;}
+.m-ipt-select-service li:hover{text-decoration:none;color:#93c3cd;background:#ccc;}
+.m-right{
+	width:400px;
+	height:200px;
+	float:left;
+	position:absolute;
+	left:260px;
+	top:-6px;
+	}
+.m-href{ overflow:hidden; padding-top:40px;}
+.m-href li{ padding-left:16px; line-height:26px;}
+.m-href li a{
+font-family:"Microsoft Yahei";
+font-size: 12px;
+color: #FFFFFF;
+margin-top:15px;
+text-decoration:none;
+height:34px;
+width:100px;
+line-height:55px;
+vertical-align: bottom;
+}
+
+.m-bottom{
+clear:both;
+padding-left:20px;
+position:absolute;
+top:210px;
+overflow:hidden;
+}
+*/
+
+
+
+/********buttom************/
+
+
+
+
+/*.u-btn-submit{
+    display: inline-block;
+    width: 70px;height: 34px;
+    border: 0;
+    cursor: pointer;
+    background: url('../images/bottom.png') no-repeat;
+    line-height: 36px;
+    text-align: center;
+}*/
+
+label.error{display: inline-block;
+color: #ffffff;
+font-size: 12px;
+ font-weight: bold;
+background: url("../images/bg/bg_error.png") no-repeat;
+    padding: 12px 10px 12px 17px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.m-ipt .m-ipt-account.error{border-color:red;}
+input{outline:none}
+
+
+
+
+
+.u-login-del{background: url("../images/icon/login-remove.png") no-repeat center; }
+
+input::-ms-clear{display:none;}
+
+.u-select-menu>ul{
+    display: block;
+}
+.u-select-menu>ul>li{
+    padding: 4px;
+    cursor: default;
+    display: block;
+}
+.u-select-menu>ul>li:hover,.u-select-menu>ul>li.z-selected{
+    background: #ececec;
+    font-size: 14px;
+    padding: 8px 4px;
+}
+.u-select-menu>ul>li:hover .u-delete-history-user
+{
+    display: block;
+}
+.g-doc-center{position: relative;min-height: 700px;}
+.u-mn-container{position: absolute;right: 160px; top:100px;z-index: 1000;}
+.u-login-input{width: 265px;border-radius:5px;padding: 11px 20px 11px 8px;border: 2px solid #cbcbcb; font-size: 16px;/*color: #959595*/}
+.u-login-input:focus{border-color: #03adfc;}
+.u-select-hover,.u-select,.u-login-del{
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 216px;
+    right: 148px;
+    cursor: pointer;
+    zoom: 1;
+    z-index: 222;
+}
+.u-select{background: url("../images/icon/index_login.png") no-repeat center;}
+.u-select.z-collapse{background-image: url("../images/icon/index_login_hover.png");}
+.u-select-menu{overflow: auto;position: absolute;width: 294px;background: #ffffff;
+    border: 1px solid #e2e2e2;height: 163px;margin-top: -3px;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;z-index: 1000;}
+.u-login-btn{display: block;background: url("../images/icon/login-btn.png") no-repeat;width:293px;height: 55px;line-height: 55px;text-align: center;color: #ffffff;font-size: 18px; cursor: pointer;}
+.u-login-btn:hover{background: url("../images/icon/login-btn-hover.png") no-repeat;}
+
+/**version*/
+.g-doc-bottom-container{position: fixed;left: 0;right: 0;bottom: 0;}
+.g-doc-bottom{height:40px;line-height: 40px;font-size:13px;color:#FFFFFF;margin-left: 25px;}
+.g-doc-bottom a{font-size:14px;color:#FFFFFF;text-decoration:none;margin: 0 10px;}
+
+.u-delete-history-user{display:none;float: right;width: 25px;height: 25px;cursor: pointer; background: url("../images/icon/login-remove.png") no-repeat center;margin-right: 2px;}
+
+.img-wh{width: 430px; height: 67px;}
+
+

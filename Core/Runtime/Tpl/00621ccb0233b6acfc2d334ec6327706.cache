@@ -1,0 +1,180 @@
+<form method="post">
+    <input name="PolicyType" value="2" type="hidden"/>
+    <div class="m-panel s-panel">
+        <div class="m-panel-title s-panel-title">
+            <span class="u-panel-title-son">基本信息</span>
+            <b class="icon-tab-right"></b>
+        </div>
+        <div class="m-panel-body">
+            <div class="m-panel-item s-panel-item">
+                <div class="u-setting4">
+                    <ul class="u-setting-li">
+                        <li>
+                            <label><span class="u-business-span-width f-w1">策略名称</span>
+                                <input type="text" class="u-panel-input1" name="PolicyName" id="PolicyName" required commonStr="commonStr"></label>
+                        </li>
+                        <li>
+                            <label><span class="u-business-span-width f-w1">策略描述</span>
+                                <input type="text" class="u-panel-input1" name="PolicyDescribe" id="PolicyDescribe" required commonStr="commonStr"></label>
+                        </li>
+                        <li>
+                            <span class="u-business-span-width f-w1">列表类型</span>
+                                <label class="f-mr20"><input type="radio" name="IsBlackPolicy" class="f-input-align" value="1" checked>
+                                    黑名单</label>
+                                <label><input type="radio" name="IsBlackPolicy" class="f-input-align" value="0">
+                                白名单</label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-panel s-panel">
+        <div class="m-panel-title s-panel-title">
+            <span class="u-panel-title-son">浏览控制</span>
+            <b class="icon-tab-right"></b>
+        </div>
+        <div class="m-panel-body">
+            <div class="m-panel-item s-panel-item">
+                <div class="m-tab">
+                    <div class="m-tab-main">
+                        <ul class="m-tab-all">
+                            <li data-target="tab-shopping" class="z-active">
+                                <a> 购物网站 </a>
+                                <div  class="triangle-panel-control">
+                                    <ul class="f-fl f-ib">
+                                        <li class="f-fl f-ib u-add-item-btn" data-id="购物类网站" data-key="ShopKind">
+                                            <a class="u-view-limit">
+                                                <i class="web-img web-img-add"></i>
+                                                <p class="tab-content-control">添加</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li data-target="tab-gateway">
+                                <a> 门户网站 </a>
+                                <div  class="triangle-panel-control">
+                                    <ul class="f-fl f-ib">
+                                        <li class="f-fl f-ib">
+                                            <a class="u-view-limit u-add-item-btn" data-id="门户类网站" data-key="DoorKind">
+                                                <i class="web-img web-img-add"></i>
+                                                <p class="tab-content-control">添加</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li data-target="tab-video">
+                                <a> 视频网站 </a>
+                                <div  class="triangle-panel-control">
+                                    <ul class="f-fl f-ib">
+                                        <li class="f-fl f-ib u-add-item-btn" data-id="视频类网站" data-key="VideoKind">
+                                            <a class="u-view-limit">
+                                                <i class="web-img web-img-add"></i>
+                                                <p class="tab-content-control">添加</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li data-target="tab-contact">
+                                <a> 社交网站 </a>
+                                <div  class="triangle-panel-control">
+                                    <ul class="f-fl f-ib">
+                                        <li class="f-fl f-ib u-add-item-btn" data-id="社交类网站" data-key="SNSKind">
+                                            <a class="u-view-limit">
+                                                <i class="web-img web-img-add"></i>
+                                                <p class="tab-content-control">添加</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li data-target="tab-custom">
+                                <a> 自定义网站 </a>
+                                <div  class="triangle-panel-control">
+                                    <ul class="f-fl f-ib">
+                                        <li class="f-fl f-ib u-add-custom-item-btn">
+                                            <a class="u-view-limit">
+                                                <i class="web-img web-img-add"></i>
+                                                <p class="tab-content-control">添加</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!--新增页面-->
+<div id="add-window-box" style="display:none">
+    <div class="u-reg-manage s-reg-manage" id="add-window-title">
+            <span class="u-add-window-title1">
+            <img src="/Resources/images/icon/icon-add-window.png" class="u-add-window-title-img">
+            </span>
+        <span class="u-add-window-title2">添加网站</span>
+    </div>
+    <div style="min-height: 190px;">
+        <div class="u-reg-main-text">
+            <form enctype="multipart/form-data">
+                <ul class="u-reg-ul">
+                    <li>
+                        <label>
+                            <span>网站名称</span><span style="display: inline-block;margin-left: -2px;">：</span>
+                            <input type="text" class="u-panel-reg-input"  name="name">
+                        </label>
+                    </li>
+                    <li class="u-description">
+                        <span>例如：淘宝</span>
+                    </li>
+                    <li>
+                        <label>
+                            <span class="">网址链接</span><span>：</span>
+                            <input class="u-panel-reg-input" type="text" name="url">
+                        </label>
+                    </li>
+                    <li class="u-description">
+                        <span>例如：www.taobao.com</span>
+                    </li>
+
+                </ul>
+            </form>
+        </div>
+    </div>
+        <div class="m-panel-pop-bottom-btn " style="width: 460px;">
+            <input type="button"  class="btn u-upload-btn u-upload-btn-submit submit-btn" value="添加"/>
+            <input type="button" value="取 消" class="u-upload-btn u-upload-btn-reset cancel-btn">
+        </div>
+
+</div>
+<div id="choose-tab-body" style="display:none">
+    <div class="u-reg-manage s-reg-manage" id="choose-tab-title">
+            <span class="u-add-window-title1">
+            <img src="/Resources/images/icon/icon-add-window.png" class="u-add-window-title-img">
+            </span>
+        <span class="u-add-window-title2">从库中选择</span>
+    </div>
+    <div style="min-height: 190px;">
+        <div class="u-reg-main-text" style="max-height: 180px;overflow-y: auto;">
+            <form enctype="multipart/form-data" >
+                <ul class="f-oh f-p20" id="add-item-from-database">
+
+                </ul>
+            </form>
+        </div>
+    </div>
+        <div class="m-panel-pop-bottom-btn" style="width: 460px;">
+            <input type="button"  class="btn u-upload-btn u-upload-btn-submit submit-btn" value="添加"/>
+            <input type="button" value="取 消" class="u-upload-btn u-upload-btn-reset cancel-btn" >
+        </div>
+
+</div>
+<div class="m-btn">
+    <a class="u-btn-ok s-btn-ok <?php disable('BehaviorControlPageEdit'); ?>">确 定</a>
+    <a class="u-btn-cancel s-btn-cancel">取 消</a>
+</div>

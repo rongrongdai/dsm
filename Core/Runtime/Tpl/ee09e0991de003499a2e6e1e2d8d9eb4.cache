@@ -1,0 +1,120 @@
+<?php
+if(!defined("WOWOSTAR"))exit;
+Common::widget("Body")->commonHeader();
+Common::widget("Body")->commonTopMenu();
+?>
+<script>
+    window.LIMIT_CONTROLLER={
+        "EDIT":"<?php echo hasRight('LogPageEdit');?>",
+        "EDIT_ALL":"<?php echo hasRight('LogPageEditAll');?>",
+        "IS_ADMIN":"<?php echo isAdmin();?>"
+    };
+</script>
+<link rel="stylesheet" href="/Resources/js/plugin/daterangepicker/daterangepicker.css" />
+<script src="/Resources/js/plugin/daterangepicker/moment.min.js"></script>
+<script src="/Resources/js/plugin/daterangepicker/jquery.daterangepicker.js"></script>
+
+<script src="/Resources/js/module/log.js"></script>
+
+<div class="m-content">
+    <!--左侧栏-->
+    <div class="g-sd s-sd u-ajax-tree s-ajax-tree z-generated z-isLoaded" id="menu-container-log">
+        <ul>
+            <li>
+                <a class="u-ajax-tree-item u-ajax-tree-root s-ajax-tree-root icon-user-lv1 z-isLoaded u-log-item client"
+                   style="padding-left: 20px;" data-group="client">
+                    <img src="/Resources/images/icon/icon-log-lv1.png" class="u-log-left-img">
+                    <span class="u-ajax-tree-text">客户端日志</span>
+                </a>
+            </li>
+
+            <li>
+                <a class="u-ajax-tree-item u-ajax-tree-root s-ajax-tree-root icon-user-lv1 z-isLoaded u-log-item admin"
+                   style="padding-left: 20px;" data-group="admin">
+                    <img src="/Resources/images/icon/icon-log-lv1.png" class="u-log-left-img">
+                    <span class="u-ajax-tree-text">管理端日志</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!--左侧栏-->
+    <!--右侧栏-->
+    <div class="g-mn">
+        <!--内部部分的头部工具 -->
+        <div class="m-mn-top s-mn-top f-padding-bottom7 lognew-m-mn-top" >
+            <div class="m-log-top">
+               <div class="new-log-tpal">
+                  <span class="s-pa-zm" id="typeDa" title="操作类型">类型</span><input id="log-types" name="log-types" class="inputcs-1" />
+
+                  <span class="s-pa-zm" id="adminDa" title="终端登录的账号">账号</span><input type="text" id="login-z" name="login-z" class="inputcs" /><span  id="admin-d" class="newlon-admin"></span>
+
+                  <span class="s-pa-zm" id="ipDa" title="终端IP地址">登录IP</span><input type="text" id="user-n"  name="user-n" class="inputcs"/><span  id="adminip-d" class="newlon-admin"></span>
+
+                  <span class="s-pa-zm" id="contentDa"  title="文件名关键字" >关键字</span><input type="text" id="content-s" name="content-s" class="inputcs"/><span  id="keyword-d" class="newlon-admin"></span>
+
+               </div>
+
+
+                <div class="new-log-inputs">
+      <span class="s-pa-zm">时间</span>
+
+   <input name="pollresult" id="all-week" type="radio" class="span1 filter-time" checked value="week" ><span class="inp-se" id="weekOne" title="显示7天内的记录">7天内</span>
+
+   <input name="pollresult" id="all-month" type="radio" class="span filter-time" value="month"><span class="inp-se" id="monthOne" title="显示30天内的记录">30天内</span>
+
+   <input name="pollresult" id="all-t" type="radio" class="span filter-time" value="all"><span class="inp-se la" id="allDa" title="显示全部记录">全部</span>
+
+   <input name="pollresult"  type="radio" id="custom-d" class="span filter-time" value="custom"><span class="inp-se" id="customDa" title="显示自定义时间范围内的记录" >自定义</span>
+   <input type="text" class="u-panel-input11 u-log-date-select f-style-padding inputcs" id="u-log-date"  readonly placeholder="日期筛选">
+
+                  <span class="u-log-span2">
+                <a class="u-btn-cancel s-btn-cancel  " id="log-reset" title="重置筛选条件">重置</a>
+                 </span>
+
+                <span class="u-log-span2">
+                <a class="u-btn-cancel s-btn-cancel " id="log-inquire" title="开始查询">查询</a>
+               </span>
+
+                </div>
+                <!--<span class="u-log-span2">-->
+                <!--<a class="u-btn-ok2 s-btn-ok2" id="u-btn-operate">导 出</a>-->
+                <!--</span>-->
+            </div>
+        </div>
+        <div class="m-content-container newlog-container" id="m-content-container-log">
+            <div class="m-content-item m-content-item-list client f-dn">
+                <div class="u-ajax-table-container newlog-container" id="u-ajax-table-container-client"></div>
+                <div class="u-page-toolbar" id="u-page-toolbar-client">
+                    <?php
+                Common::widget("Page")->pageToolbar(50,false);
+                    ?>
+                </div>
+            </div>
+            <!--<div class="m-content-item m-content-item-list process f-dn">-->
+                <!--<div class="u-ajax-table-container" id="u-ajax-table-container-process"></div>-->
+                <!--<div class="u-page-toolbar" id="u-page-toolbar-process">-->
+                    <!--<?php-->
+              <!--Common::widget("Page")->pageToolbar();-->
+                    <!--?>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="m-content-item m-content-item-list admin f-dn">
+                <div class="u-ajax-table-container" id="u-ajax-table-container-admin"></div>
+                <div class="u-page-toolbar" id="u-page-toolbar-admin">
+                    <?php
+              Common::widget("Page")->pageToolbar(50,false);
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form class="f-dn" method="post" action="" id="export-excel" target="_blank">
+        <input type="hidden" name="EXPORT" value="true"/>
+        <input type="hidden" name="EXPORT_DATA" id="export-excel-data" value=""/>
+        <input type="hidden" name="TotalCount" id="export-excel-total" value=""/>
+    </form>
+    <!--右侧栏--></div>
+<?php
+Common::widget("Body")->commonFooter();
+?>

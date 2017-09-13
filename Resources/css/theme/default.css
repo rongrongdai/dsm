@@ -1,0 +1,63 @@
+/*.s-hd{ background: url("../../images/bg/top-bg.png");}*/
+/*.s-sd{ background: url("../../images/bg/bg_left2.png") repeat-y ;overflow: auto;}*/
+.s-line{ background: #cecece;}
+/*.s-top-logo{background: url("../../images/icon/top-logo.png") no-repeat center; }*/
+
+/*.s-nav{ background: url("../../images/nav.png");}*/
+/*.s-search{ background:url("../../images/nav_search.png") no-repeat  95%; background-color: #ffffff;}*/
+
+/*.s-lev1{ background: url("../../images/left_one.png") no-repeat;}*/
+.s-lev2{background: url("../../images/left_imgTwo.png") no-repeat left;}
+.s-lev2:hover{ background: url("../../images/left_hover.png") no-repeat left;}
+.s-lev3{ background: url("../../images/left_lev3_hover.png") no-repeat left;}
+.s-lev3:hover{ background: url("../../images/left_lev3.png") no-repeat left;}
+
+/*.s-mn-top{ background: #d8dadb;border: 1px solid #b2b1b1;border-top: 0px;}*/
+
+/*.s-icon-add{ background: url("../../images/btn_add.png") no-repeat center;}*/
+.s-icon-edit{ background-color: #FFFFFF; background: url("../../images/icon_edit.png")  no-repeat center;}
+/*.s-icon-del{ background-color: #FFFFFF; background: url("../../images/icon_del.png")  no-repeat center;}*/
+/*.s-icon-file-up{ background-color: #FFFFFF; background: url("../../images/icon_fileup.png")  no-repeat center;}*/
+/*.s-icon-file-down{ background-color: #FFFFFF; background: url("../../images/icon_filedown.png")  no-repeat center;}*/
+/*.s-function{ background-color: #FFFFFF; background: url("../../images/icon_function.png")  no-repeat center;}*/
+
+.s-select{ background:url("../../images/icon_select.png") no-repeat right 10px center; }
+.s-btn-last{ background:url("../../images/icon_last.png") no-repeat center;}
+.s-btn-left{background: url("../../images/icon_left.png")  no-repeat center;}
+.s-btn-right{ background: url("../../images/icon_right.png")  no-repeat center;}
+.s-btn-new{ background: url("../../images/icon_new.png") no-repeat center;}
+.s-btn-flush{ background: url("../../images/icon_flush.png") no-repeat center;}
+
+.s-btn-ok:hover,.s-btn-cancel:hover{ background: url("../../images/version2(9.9)/icon-btn-bottom-ok.png") no-repeat; color: #FFFFFF;}
+.z-disabled.s-btn-ok{background: #fafafa;color: #999;border-color: #cccccc;cursor: default;}
+.s-btn-cancel,.s-btn-ok{background: url("../../images/version2(9.9)/icon-btn-bottom-no.png") no-repeat;}
+.u-basic-top.z-expanded{ background: url("../../images/icon_expanded.png") no-repeat right;}
+
+
+.s-border-line{ border-bottom: 1px solid #e0e0e0;}
+
+
+.s-panel-item1{ border-bottom: 1px solid #e0e0e0;}
+.s-img1{background: url("../../images/version1/left-tranf.png") no-repeat center;}
+.s-img2{background: url("../../images/version1/right-tranf.png") no-repeat center;}
+
+/**panel面板肤色更换**/
+.s-panel{ background: #f8f8f8;border-bottom: 1px solid #e0e0e0;}
+.s-panel-title{background: #eaebeb; border-top: 1px solid #DADADA;border-bottom: 1px solid #DADADA;position: relative;s-panel-itembox-shadow: 0px 2px 4px #b8b6b6;}
+.s-panel-item{ border-top: 10px; border-bottom:1px solid #e0e0e0;background: #f8f8f8;}
+.s-panel-item:last-child{border-top:none; }
+
+.s-fixed{ background-color: #eeefef; box-shadow: -1px -1px 7px #989899;}
+
+/*.s-fixed-span1{ background: #cdd0d5;}*/
+.s-fixed-span1{background: url("../../images/version1/icon-fixed.png") no-repeat;}
+.s-top-icon-search{background: url("../../images/icon/search.png") no-repeat center center;}
+.s-top-choose{background: url("../../images/version2(9.9)/icon-choose.png") no-repeat;}
+.s-log-arrow{background: url("../../images/version2(9.9)/icon-log-arror.png") no-repeat center;margin-left: -20px;}
+.s-btn-ok2{background: url("../../images/icon/icon-mn-top-lv.png") no-repeat;}
+.s-top-role{background: url("../../images/icon/top-role.png") no-repeat;}
+.s-top-role:hover{background: url("../../images/icon/top-role-hover.png") no-repeat;}
+.s-top-drop{background: url("../../images/bg/drop-bg.png") no-repeat;}
+/*.s-reg-manage{background: url("../../images/bg/bg-manage.png") repeat-x;background-position:0 -1px;}*/
+.s-bottom-bg{background-color: #dae8fe; color: #494a4c;}
+.s-c,.s-c:hover{color: #1477fe;}

@@ -1,0 +1,154 @@
+<?php
+if(!defined("WOWOSTAR"))exit;
+   Common::widget("Body")->commonHeader();
+   Common::widget("Body")->commonTopMenu();
+?>
+<script>
+   window.LIMIT_CONTROLLER={
+      "EDIT":"<?php echo hasRight('BehaviorControlPageEdit');?>",
+      "EDIT_ALL":"<?php echo hasRight('BehaviorControlPageEditAll');?>",
+      "IS_ADMIN":"<?php echo isAdmin();?>"
+   };
+</script>
+<script src="/Resources/js/plugin/binfu/binfuTab.js"></script>
+<script src="/Resources/js/module/behavior_control.js"></script>
+<script src="/Resources/js/plugin/binfu/collapsePanel.js"></script>
+<script src="/Resources/js/plugin/binfu/collapseFloatPanel.js"></script>
+<div class="g-sd s-sd" >
+   <div id="menu-container-behavior-control"></div>
+</div>
+<!--右侧栏-->
+<div class="g-mn">
+   <!--内部部分的头部工具-->
+   <div class="m-mn-top s-mn-top">
+      <div class="">
+         <table class="u-panel-table-top" id="u-main-toolbar-behavior-control">
+            <tr class="u-panel-table-top-tr">
+               <td id="add-behavior-control-td">
+                  <a class="u-main-toolbar-btn <?php  disable('BehaviorControlPageEditAll') ;?>" data-group="add-behavior-control" id="add-behavior-control">
+                     <i class="icon-add icon-common"></i>
+                     <span class="pl-panel f-w0">新增</span>
+                  </a>
+               </td>
+               <td class="f-margin-left1" id="edit-behavior-control-td">
+                  <a class="u-main-toolbar-btn <?php  disable('BehaviorControlPageEdit') ;?>" data-group="edit-behavior-control" id="edit-behavior-control">
+                     <i class="icon-edit icon-common"></i>
+                     <span class="pl-panel f-w0">编辑</span>
+                  </a>
+               </td>
+               <!--<td class="f-margin-left1">
+                  <a class="u-main-toolbar-btn <?php  disable('BehaviorControlPageEditAll') ;?>" data-group="edit-dept" id="frozen-behavior-control">
+                     <i class="icon-blocking icon-common"></i>
+                     <span class="pl-panel f-w0" id="u-btn-txt-frozen-behavior-control">停用</span>
+                  </a>
+               </td>-->
+               <td class="f-margin-left1">
+                  <a class="u-main-toolbar-btn <?php  disable('BehaviorControlPageEditAll') ;?>"  id="del-behavior-control">
+                     <i class="icon-del icon-common"></i>
+                     <span class="pl-panel f-w0">删除</span>
+                  </a>
+               </td>
+            </tr>
+            <tr class="u-panel-table-top-tr">
+               <td class="f-margin-left1">
+                  <a class="u-main-toolbar-btn <?php  disable('BehaviorControlPageEditAll') ;?>" id="u-bind-behavior-control">
+                     <i class="icon-issued"></i>
+                     <span class="f-w0">应用</span>
+                  </a>
+                   <a class="u-main-toolbar-btn f-dn <?php  disable('BehaviorControlPageEditAll') ;?>" id="u-unbind-behavior-control">
+                       <i class="icon-cancel "></i>
+                       <span class="f-w0">取消</span>
+                   </a>
+               </td>
+            </tr>
+         </table>
+      </div>
+   </div>
+   <!--内部部分的头部工具-->
+   <!--主题内容-->
+   <div class="m-content-container" id="m-content-container-behavior-control">
+      <!--用户主页列表-->
+      <div class="m-content-item u-list-panel m-content-item-list">
+         <div class="u-ajax-table-container" id="u-ajax-table-container-behavior-control"></div>
+         <div class="u-page-toolbar" id="u-page-toolbar-behavior-control">
+            <?php
+            Common::widget("Page")->pageToolbar();
+            ?>
+         </div>
+      </div>
+      <div class="m-content-item u-form-panel f-dn" >
+      </div>
+   </div>
+
+
+</div>
+<!--右侧栏-->
+        <!--弹出选择框wqq-->
+<div id="choose-window-box" style="display:none">
+    <form id="chooseTab">
+    <div class="u-reg-manage s-reg-manage" id="choose-window-title">
+            <span class="u-add-window-title1">
+            <img src="/Resources/images/icon/icon-choose-window.png" class="u-add-window-title-img">
+            </span>
+        <span class="u-add-window-title2">选择新增的控制类型</span>
+    </div>
+    <div>
+        <div class="u-reg-main-text f-mt20">
+            <form enctype="multipart/form-data" id="do-reg-form">
+                <ul class="f-lh45 f-tac">
+                    <li>
+                        <label>
+                            <input type="radio"  name="chooseTab" value="0" checked>
+                            <span>基础权限控制</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="radio" name="chooseTab"  value="2">
+                            <span>网页浏览控制</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="radio" name="chooseTab" value="1">
+                            <span>即时通信控制</span>
+                        </label>
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <div class="m-panel-pop-bottom-btn " style="width: 460px;">
+            <input type="button"  class="btn u-upload-btn u-upload-btn-submit" value="确定" id="choosed-submit"/>
+            <input type="button" value="取 消" class="u-upload-btn u-upload-btn-reset cancel-btn" >
+        </div>
+
+    </div>
+    </form>
+</div>
+
+<!--<div class="u-icon-right-tree"></div>-->
+<div class="u-float-panel s-fixed" id="u-bind-panel" style="z-index: 10001;">
+    <div class="u-fixed-span1 s-fixed-span1">
+        <div class="u-fixed-span2">
+            <i><img src="/Resources/images/version1/icon-fixed-img.png"></i>
+            组织架构图
+        </div>
+    </div>
+    <div class="u-align-auto" id="u-bind-tree"></div>
+    <div class="u-fixed-btn">
+        <a id="u-cancel-bind" class="u-upload-btn u-fixed-hidden ">取 消</a>
+        <a id="u-submit-bind" class="u-upload-btn u-fixed-hover  <?php disable('BehaviorControlPageEditAll') ?>">确 定</a>
+    </div>
+</div>
+<div class="u-float-panel s-fixed" id="u-filter-panel">
+    <div class="u-fixed-span1 s-fixed-span1">
+        <div class="u-fixed-span2">
+            <i><img src="/Resources/images/version1/icon-fixed-img.png"></i>
+            组织架构图
+        </div>
+    </div>
+    <div class="u-align-auto" id="u-filter-tree"></div>
+</div>
+<?php
+   Common::widget("Body")->commonFooter();
+?>

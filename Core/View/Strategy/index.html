@@ -1,0 +1,477 @@
+<?php
+if(!defined("WOWOSTAR"))exit;
+Common::widget("Body")->commonHeader();
+Common::widget("Body")->commonTopMenu();
+?>
+<script>
+    window.LIMIT_CONTROLLER={
+        "EDIT":"{:hasRight('StrategyPageEdit')}",
+        "EDIT_ALL":"{:hasRight('StrategyPageEditAll')}",
+        "IS_ADMIN":"{:isAdmin()}"
+    };
+</script>
+<script src="__STATIC__/js/module/strategy.js"></script>
+<script src="__STATIC__/js/plugin/binfu/collapsePanel.js"></script>
+<div class="m-content"><!--左侧栏-->
+<div class="g-sd s-sd" id="menu-container-strategy">
+</div>
+
+<!--左侧栏-->
+<!--右侧栏-->
+<div class="g-mn">
+<!--内部部分的头部工具-->
+<div class="m-mn-top s-mn-top">
+
+    <div class="">
+        <table class="u-panel-table-top" id="u-main-toolbar-strategy">
+            <tr class="u-panel-table-top-tr">
+                <td>
+                    <a class="u-main-toolbar-btn <?php disable('StrategyPageEditAll') ?>" id="add-strategy">
+                        <i class="icon-add icon-common"></i>
+                        <span class="pl-panel f-w0">新增</span>
+                    </a>
+                </td>
+                <td class="f-margin-left1">
+                    <a class="u-main-toolbar-btn <?php disable('StrategyPageEdit') ?>" id="edit-strategy">
+                        <i class="icon-edit icon-common"></i>
+                        <span class="pl-panel f-w0">编辑</span>
+                    </a>
+                </td>
+                <td class="f-margin-left1">
+                    <a class="u-main-toolbar-btn <?php disable('StrategyPageEditAll') ?>" id="del-strategy">
+                        <i class="icon-del icon-common"></i>
+                        <span class="pl-panel f-w0">删除</span>
+                    </a>
+                </td>
+            </tr>
+            <tr class="u-panel-table-top-tr">
+                <td>
+                    <a class="u-main-toolbar-btn <?php disable('StrategyPageEditAll') ?>" id="u-import-strategy">
+                        <i class="icon-import"></i>
+                        <span class="f-w0">导入</span>
+                    </a>
+                </td>
+                <td class="f-margin-left1">
+                    <a class="u-main-toolbar-btn" id="u-export-strategy">
+                        <i class="icon-export "></i>
+                        <span class="f-w0">导出</span>
+                    </a>
+                </td>
+            </tr>
+            <tr class="u-panel-table-top-tr">
+                <td>
+                    <a class="u-main-toolbar-btn <?php disable('StrategyPageEditAll') ?>" id="u-issued-strategy">
+                        <i class="icon-issued "></i>
+                        <span class="f-w0">下发</span>
+                    </a>
+                </td>
+                <td class="f-margin-left1">
+                    <a class="u-main-toolbar-btn <?php disable('StrategyPageEditAll') ?>" id="u-sync-strategy">
+                        <i class="icon-sync "></i>
+                        <span class="f-w0">同步</span>
+                    </a>
+                </td>
+            </tr>
+            <!--<tr class="u-panel-table-top-tr f-dn" id="u-order-toolbar">
+                <td class="f-margin-left1 u-save-order" id="u-save-order">保存排序</td>
+            </tr>-->
+            <tr class="u-panel-table-top-tr">
+                <td>
+                    <a class="u-main-toolbar-btn <?php disable('StrategyPageEditAll') ?>" data-permition="<?php echo hasRight('StrategyPageEditAll1') ?>" id="u-copy-to">
+                        <i class="icon-copy-to"></i>
+                        <span class="f-w0">复制到</span>
+                    </a>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+<!--内部部分的头部工具-->
+<div class="m-content-container" id="m-content-container-strategy">
+    <!--策略主列表-->
+   <div class="m-content-item m-content-item-list">
+       <div class="u-ajax-table-container" id="u-ajax-table-container-strategy"></div>
+        <div class="u-page-toolbar" id="u-page-toolbar-strategy">
+            <?php
+               Common::widget("Page")->pageToolbar(500);
+            ?>
+        </div>
+       <!--<div class="u-icon-right-tree-off"></div>-->
+    </div>
+    <div class="m-content-item u-form-panel f-dn" >
+    </div>
+    <!--策略主列表-->
+
+    <!--添加策略-->
+    <div class="m-content-item m-content-item-form-strategy-add f-dn">
+        <form id="u-form-add-strategy">
+            <div class="m-content-item-wrapper">
+                <div class="s-panel u-panel">
+                    <div class="u-panel-title s-panel-title">
+                        <span class="u-panel-title-son z-expanded">常规设置</span>
+                        <b class="icon-tab-right"></b>
+                    </div>
+                    <div class="u-panel-body">
+                        <div class="u-panel-item1 s-panel-item1">
+                                <ul class="u-add-user-dept-ul">
+                                <li><label><span class="u-add-user-dept-li f-word-margin ">策略名称</span>
+                                        <input type="text" class="u-panel-input" id="u-strategy-name" name="AddPolicySoftwareGroup" required maxlength="100"  latinletter="latinletter">
+                                    </label>
+                                </li>
+                                <li>
+                                    <label><span class="u-add-user-dept-li ">策略隶属</span>
+                                        <input type="text" class="u-panel-input" id="u-belong-strategy" name="AddPolicyGroupName" readonly="readonly">
+                                        <input type="hidden" id="Detail_AddPolicySoftwareGroup"  name="Detail_AddPolicySoftwareGroup">
+                                        <input type="hidden" id="Detail_AddPolicyGroupName"  name="Detail_AddPolicyGroupName">
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <span class="u-add-user-dept-li f-word-margin">策略引用</span>
+                                        <input type="text" class="u-panel-input" id="u-copy-strategy">
+                                    </label>
+                                </li>
+                                <li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="s-panel u-panel u-strategy-adv-set" id="u-strategy-adv-set">
+                    <div class="u-panel-title s-panel-title">
+                        <ul class="u-title-mark">
+                            <li><span class="u-other-mark z-selected-tab">常规设置</span></li>
+                            <li><span class="u-other-mark">例外设置</span></li>
+                        </ul>
+                        <b class="icon-tab-right"></b>
+                    </div>
+                    <div class="u-panel-body">
+                        <div class="u-panel-item1 s-panel-item1">
+                            <div class="u-panel-limit">策略权限</div>
+                            <div class="u-panel-checkbox">
+                                <span class="u-span1"><input type="checkbox" class="f-input-align" id="u-strategy-edit4" name="Common_DecryptWhenRead">
+                                    <label for="u-strategy-edit4">读取解密</label></span>
+                                <span class="u-span1"><input type="checkbox" class="f-input-align" id="u-strategy-edit5" name="Common_EncryptWhenCreateAndOverwrite">
+                                    <label for="u-strategy-edit5">新建加密</label></span>
+                                <span class="u-span1"><input type="checkbox" class="f-input-align" id="u-strategy-edit6" name="Common_EncryptWhenEdit">
+                                    <label for="u-strategy-edit6">修改加密</label></span>
+                                <span class="u-span1"><input type="checkbox" class="f-input-align" id="u-strategy-edit8" name="Common_RejectEdit">
+                                    <label for="u-strategy-edit8">禁止修改</label>
+                                </span>
+                                <span class="u-span1"><input type="checkbox" class="f-input-align" id="u-strategy-edit9" name="Common_RejectAllOperation">
+                                    <label for="u-strategy-edit9">禁止所有操作</label></span>
+                                <span class="u-span1"><input type="checkbox" class="f-input-align" id="u-strategy-edit10" name="Common_Passthrough">
+                                    <label for="u-strategy-edit10">文件透传</label></span>
+                            </div>
+                        </div>
+                        <div class="u-panel-item1 s-panel-item1">
+                            <div class="u-panel-limit">常规设置</div>
+                            <ul class="u-strategy-add-ul">
+                                <li>
+                                    <label> <span >受控进程<span style="color:#808183; font-size: 12px;">（例：devenv.exe|MSDEV.EXE，竖线分隔。）</span></span>
+                                        <textarea class="u-panel-area2" multiple="multiple" size="2" name="Common_ProcessList" required maxlength="5000"></textarea></label>
+                                </li>
+                                <li>
+                                    <label><span>受控策略<span style="color:#808183 ;font-size: 12px">（例：*\Templates\*|*.emf，竖线分隔。）</span></span>
+                                        <textarea multiple="multiple" size="2" class="u-panel-area2" name="Common_FileList" required maxlength="5000"></textarea></label>
+                                </li>
+                            </ul>
+                            <div>
+                                <label class="u-panel-remark">
+                                    <span class="u-dept-add-remark">备注:</span>
+                                    <textarea class="u-panel-area3" id="u-remarks" name="Common_Comment"></textarea>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="u-panel-body f-dn">
+                        <div class="u-panel-item1 s-panel-item1">
+                            <div class="u-panel-limit">策略权限</div>
+                            <div class="u-panel-checkbox">
+                                <span class="u-span1">
+                                    <label><input type="checkbox" class="f-input-align" name="Exception_DecryptWhenRead">读取解密</label>
+                                </span>
+                                <span class="u-span1">
+                                    <label><input type="checkbox" class="f-input-align" id="u-strategy-edit5" name="Exception_EncryptWhenCreateAndOverwrite"> 新建加密</label>
+                                </span>
+                                <span class="u-span1">
+                                    <label><input type="checkbox" class="f-input-align" name="Exception_EncryptWhenEdit"> 修改加密</label>
+                                </span>
+                                <span class="u-span1">
+                                    <label><input type="checkbox" class="f-input-align" name="Exception_RejectEdit"> 禁止修改</label>
+                                </span>
+                                <span class="u-span1">
+                                    <label><input type="checkbox" class="f-input-align" name="Exception_RejectAllOperation"> 禁止所有操作</label>
+                                </span>
+                                <span class="u-span1">
+                                    <label><input type="checkbox" class="f-input-align" name="Exception_Passthrough"> 文件透传</label>
+                                </span>
+                            </div>
+                        </div>
+                        <!--常规设置-->
+                        <div class="u-panel-item1 s-panel-item1">
+                            <div class="u-panel-limit">常规设置</div>
+                            <ul class="u-strategy-add-ul">
+                                <li>
+                                    <label> <span >受控进程<span style="color:#808183; font-size: 12px;">（例：devenv.exe|MSDEV.EXE，竖线分隔。）</span></span>
+                                        <textarea class="u-panel-area2" multiple="multiple" size="2" name="Exception_ProcessList"  maxlength="5000"></textarea></label>
+                                </li>
+                                <!--<li class="u-strategy-add-ul-li">
+                                    <span class="u-strategy-ul-span">
+                                        用以下方式输入：
+                                    </span>
+                                </li>-->
+                                <li>
+                                    <label><span>受控策略<span style="color:#808183 ;font-size: 12px">（例：*\Templates\*|*.emf，竖线分隔。）</span></span>
+                                        <textarea multiple="multiple" size="2" class="u-panel-area2" name="Exception_FileList" maxlength="5000"></textarea></label>
+                                </li>
+                                <!--<li class="u-strategy-add-ul-li">
+                                    <div>
+                                        <span class="u-strategy-ul-span">用以下方式输入：</span>
+                                    </div>
+                                </li>-->
+                            </ul>
+                            <div>
+                                <label class="u-panel-remark">
+                                    <span class="u-dept-add-remark">备注:</span>
+                                    <textarea class="u-panel-area3" id="u-remarks" name="Exception_Comment"></textarea>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <!--添加策略-->
+    <!--编辑策略-->
+    <div class="m-content-item m-content-item-form-strategy-edit f-dn" data-group="edit-strategy">
+        <form id="u-form-edit-strategy">
+            <div class="m-content-item-wrapper">
+                <div class="s-panel u-panel">
+                    <div class="u-panel-title s-panel-title">
+                        <span class="u-panel-title-son z-expanded">常规设置</span>
+                        <b class="icon-tab-right"></b>
+                    </div>
+                    <div class="u-panel-body">
+                        <div class="u-panel-item1 s-panel-item1">
+                            <ul class="u-add-user-dept-ul">
+                                <li><label><span class="u-add-user-dept-li f-word-margin">策略名称</span>
+                                        <input type="text" class="u-panel-input" id="u-name" name="AddPolicyDetail_name" required maxlength="100" latinletter="latinletter"></label></li>
+                                <li><label><span class="u-add-user-dept-li">策略隶属</span>
+                                        <input type="text" class="u-panel-input" id="u-belong-strategy-edit" readonly="readonly">
+                                        <input type="hidden" name="PolicyID">
+                                        <input type="hidden" name="GroupID" disableclear="true">
+                                        <input type="hidden" id="Detail_AddPolicySoftwareGroup"  name="Detail_AddPolicySoftwareGroup">
+                                        <input type="hidden" id="Detail_AddPolicyGroupName"  name="Detail_AddPolicyGroupName">
+                                        <input type="hidden" name="index">
+                                        <input type="hidden" name="stayontop">
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="s-panel u-panel">
+                    <div class="u-panel-title s-panel-title">
+                        <ul class="u-title-mark">
+                            <li><span class="u-other-mark z-selected-tab">常规设置</span></li>
+                            <li><span class="u-other-mark">例外设置</span></li>
+                        </ul>
+                        <b class="icon-tab-right"></b>
+                    </div>
+                    <div class="u-panel-body">
+                        <div class="u-panel-item1 s-panel-item1">
+                            <div class="u-panel-limit">策略权限</div>
+                            <div class="u-panel-checkbox">
+                                <span class="u-span1"><label>
+                                        <input type="checkbox" class="f-input-align" name="Common_DecryptWhenRead">读取解密</label></span>
+                                <span class="u-span1"><label>
+                                        <input type="checkbox" class="f-input-align" name="Common_EncryptWhenCreateAndOverwrite">新建加密</label></span>
+                                <span class="u-span1"><label>
+                                        <input type="checkbox" class="f-input-align" name="Common_EncryptWhenEdit">修改加密</label></span>
+                                <span class="u-span1"><label>
+                                        <input type="checkbox" class="f-input-align" name="Common_RejectEdit">禁止修改</label></span>
+                                <span class="u-span1"><label>
+                                        <input type="checkbox" class="f-input-align"  name="Common_RejectAllOperation">禁止所有操作</label></span>
+                                <span class="u-span1"><label>
+                                        <input type="checkbox" class="f-input-align" name="Common_Passthrough">文件透传</label></span>
+                            </div>
+                        </div>
+                        <div class="u-panel-item1 s-panel-item1">
+                            <div class="u-panel-limit">常规设置</div>
+                            <ul class="u-strategy-add-ul">
+                                <li>
+                                    <label> <span >受控进程<span style="color:#808183; font-size: 12px;">（例：devenv.exe|MSDEV.EXE，竖线分隔。）</span></span>
+                                        <textarea class="u-panel-area2" multiple="multiple" size="2" name="Common_ProcessList" required maxlength="5000"></textarea></label>
+                                </li>
+                                <li>
+                                    <label><span>受控策略<span style="color:#808183 ;font-size: 12px">（例：*\Templates\*|*.emf，竖线分隔。）</span></span>
+                                        <textarea multiple="multiple" size="2" class="u-panel-area2" name="Common_FileList" required maxlength="5000"></textarea></label>
+                                </li>
+                            </ul>
+                            <div>
+                                <label class="u-panel-remark">
+                                    <span class="u-dept-add-remark">备注:</span>
+                                    <textarea class="u-panel-area3" id="u-remarks" name="Common_Comment"></textarea>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="u-panel-body f-dn">
+                        <div class="u-panel-item1 s-panel-item1">
+                            <div class="u-panel-limit">策略权限</div>
+                            <div class="u-panel-checkbox">
+                                <span class="u-span1">
+                                    <label><input type="checkbox" class="f-input-align" name="Exception_DecryptWhenRead">读取解密</label>
+                                </span>
+                                <span class="u-span1">
+                                    <label><input type="checkbox" class="f-input-align" name="Exception_EncryptWhenCreateAndOverwrite">新建加密</label>
+                                </span>
+                                <span class="u-span1">
+                                    <label><input type="checkbox" class="f-input-align" name="Exception_EncryptWhenEdit">修改加密</label>
+                                </span>
+                                <span class="u-span1">
+                                    <label><input type="checkbox" class="f-input-align" name="Exception_RejectEdit">禁止修改</label>
+                                </span>
+                                <span class="u-span1">
+                                    <label><input type="checkbox" class="f-input-align"  name="Exception_RejectAllOperation">禁止所有操作</label>
+                                </span>
+                                <span class="u-span1">
+                                    <label><input type="checkbox" class="f-input-align" name="Exception_Passthrough">文件透传</label>
+                                </span>
+                            </div>
+                        </div>
+                        <!--列外设置-->
+                        <div class="u-panel-item1 s-panel-item1">
+                            <div class="u-panel-limit">常规设置</div>
+                            <ul class="u-strategy-add-ul">
+                                <li>
+                                    <label> <span >受控进程<span style="color:#808183; font-size: 12px;">（例：devenv.exe|MSDEV.EXE，竖线分隔。）</span></span>
+                                        <textarea class="u-panel-area2" multiple="multiple" size="2" name="Exception_ProcessList"  maxlength="5000"></textarea></label>
+                                </li>
+                                <!--<li class="u-strategy-add-ul-li">
+                                    <span class="u-strategy-ul-span">
+                                        用以下方式输入：
+                                    </span>
+                                </li>-->
+                                <li>
+                                    <label><span>受控策略<span style="color:#808183 ;font-size: 12px">（例：*\Templates\*|*.emf，竖线分隔。）</span></span>
+                                        <textarea multiple="multiple" size="2" class="u-panel-area2" name="Exception_FileList"  maxlength="5000"></textarea></label>
+                                </li>
+                              <!--  <li class="u-strategy-add-ul-li">
+                                    <div>
+                                        <span class="u-strategy-ul-span">用以下方式输入：</span>
+                                    </div>
+                                </li>-->
+                            </ul>
+                            <div>
+                                <label class="u-panel-remark">
+                                    <span class="u-dept-add-remark">备注:</span>
+                                    <textarea class="u-panel-area3" id="u-remarks" name="Exception_Comment"></textarea>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--编辑策略-->
+    <div class="m-btn f-dn">
+        <a class="u-btn-ok s-btn-ok <?php disable('StrategyPageEdit') ?>" id="u-btn-ok-strategy">确 定</a>
+        <a class="u-btn-cancel s-btn-cancel">取 消</a>
+    </div>
+</div>
+</div></div>
+
+
+<!--右侧组织结构-->
+<div class="m-fixed s-fixed" id="u-strategy-dept-tree" style="right: -250px;">
+    <div class="u-fixed-span1 s-fixed-span1">
+        <div class="u-fixed-span2">
+            <i><img src="__STATIC__/images/version1/icon-fixed-img.png"></i>
+            组织架构图
+        </div>
+    </div>
+    <div class="u-align-auto" id="u-strategy-dept-container" style="bottom: 0;"></div>
+</div>
+<div class="u-icon-right-tree" id="u-expand-apply-strategy-tree"></div>
+<div class="m-fixed s-fixed f-dn" id="u-strategy-tan" style="right: -235px;">
+    <div class="u-fixed-span1 s-fixed-span1">
+        <div class="u-fixed-span2">
+            <i><img src="__STATIC__/images/version1/icon-fixed-img.png"></i>
+            组织架构图
+        </div>
+    </div>
+    <div class="u-align-auto" id="u-align-auto"></div>
+    <div class="u-copy-replace-confirm"><label style="padding-right: 10px;"><input type="radio" name="replaceit" value="1" checked/><span>覆盖同名策略</span></label><label><input type="radio" name="replaceit" value="0"/><span>跳过同名策略</span></label></div>
+    <div class="u-fixed-btn">
+        <a id="u-div-hidden" class="u-upload-btn u-fixed-hidden ">取 消</a>
+        <a id="u-div-down" class="u-upload-btn u-fixed-hover  <?php disable("StrategyPageEditAll") ?>">确 定</a>
+    </div>
+</div>
+
+<!--导入box-->
+<div id="upload-box" style="display:none">
+	<form enctype="multipart/form-data" id="upload-strategy-form">
+        <div class="u-upload" id="import-box-title">
+            <span>
+            <img src="__STATIC__/images/version1/icon-upload.png" class="u-upload-img1"><span class="u-file-upload-tab">导 入</span>
+            </span>
+        </div>
+       <div class="u-file-upload" >
+           <div class="u-upload-file-name">
+               <ul class="u-upload-ul">
+                   <li id="sel-file-box">
+                       <span class="u-upload-file-title f-w5"style="margin-left: 60px">文件名：</span>
+                       <input type="text" class="u-upload-input" id="import-file-name" readonly="readonly" style="margin-left: -1px;">
+                       <input type="button" value="浏 览" class="u-upload-btn-view" id="upload-view-btn">
+                       <input type="file" name="file" class="file" id="fileField"  style="display: none"/>
+                   </li>
+               </ul>
+
+           </div>
+           <div class="u-upload-bottom">
+               <input type="button" id="import-strategy-btn" class="btn u-upload-btn u-upload-btn-submit" value="导 入"/>
+               <input type="button" value="取 消" class="u-upload-btn u-upload-btn-reset cancel-btn">
+           </div>
+
+       </div>
+
+	</form> 
+</div>
+<!--/ 导入box-->
+<!--导出box-->
+<div id="export-strategy-box" class="f-dn">
+    <form id="export-strategy-form">
+        <div class="u-upload" id="export-strategy-box-title">
+            <span class="u-tab-top-upload">
+            <img src="__STATIC__/images/version1/icon_upload.png" class="u-upload-img1"><span class="u-file-upload-tab">导 出</span>
+            </span>
+        </div>
+        <div class="u-file-upload" >
+            <div class="u-upload-file-name">
+                <ul class="u-upload-ul">
+                    <li>
+                        <span style="margin-left: 90px;">导出归属：</span>
+                        <input type="text" class="u-upload-input u-padding" id="u-export-strategy-group-tree">
+                    </li>
+                    <li>
+                        <span class="f-description" style="margin-left: 90px;">备注：请选择需要导出的策略组</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="u-upload-bottom">
+                <input type="button" id="export-strategy-btn" class="btn u-upload-btn u-upload-btn-submit" value="导 出"/>
+                <input type="button" value="取 消" class="u-upload-btn u-upload-btn-reset cancel-btn">
+            </div>
+        </div>
+    </form>
+</div>
+<!--/ 导出box-->
+<?php
+Common::widget("Body")->commonFooter();
+?>

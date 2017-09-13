@@ -1,0 +1,76 @@
+<form method="post">
+    <input name="PolicyType" value="0" type="hidden"/>
+    <div class="m-panel s-panel">
+        <div class="m-panel-title s-panel-title">
+            <span class="u-panel-title-son">基本信息</span>
+            <b class="icon-tab-right"></b>
+        </div>
+        <div class="m-panel-body">
+            <div class="m-panel-item s-panel-item">
+                <div class="u-setting4">
+                    <ul class="u-setting-li">
+                        <li>
+                            <label><span class="u-business-span-width f-w1">策略名称</span>
+                                <input type="text" class="u-panel-input1" name="PolicyName" required commonStr="commonStr"></label>
+                        </li>
+                        <li>
+                            <label><span class="u-business-span-width f-w1">策略描述</span>
+                                <input type="text" class="u-panel-input1" name="PolicyDescribe" required commonStr="commonStr"></label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-panel s-panel">
+        <div class="m-panel-title s-panel-title">
+            <span class="u-panel-title-son">行为控制</span>
+            <b class="icon-tab-right"></b>
+        </div>
+        <div class="m-panel-body">
+            <div class="m-panel-item s-panel-item">
+                <div class="u-setting4">
+                    <ul class="u-setting-li">
+                        <li>
+                            <span class="u-business-span-width f-w3">上网控制</span>
+                            <label>
+                                <input type="radio" class="f-input-align" value="0" name="IsForbidInternet">
+                                <span>启用 </span>
+                            </label>
+                            <label class="f-ml15">
+                                <input type="radio" class="f-input-align" value="1" name="IsForbidInternet" checked>
+                                <span>禁用</span>
+                            </label>
+                        </li>
+                        <li>
+                            <span class="u-business-span-width f-w3">打印控制</span>
+                            <label>
+                                <input type="radio" class="f-input-align" value="0" name="IsForbidPrint">
+                                <span>启用 </span>
+                            </label>
+                            <label class="f-ml15">
+                                <input type="radio" class="f-input-align" value="1" name="IsForbidPrint" checked>
+                                <span>禁用</span>
+                            </label>
+                        </li>
+                        <li>
+                            <span class="u-business-span-width f-w3">U 盘控制</span>
+                            <label>
+                                <input type="radio" class="f-input-align" name="IsForbidUdisk" value="0">
+                                <span>启用 </span>
+                            </label>
+                            <label class="f-ml15">
+                                <input type="radio" class="f-input-align" name="IsForbidUdisk" value="1" checked>
+                                <span>禁用</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="m-btn">
+    <a class="u-btn-ok s-btn-ok <?php disable('BehaviorControlPageEdit'); ?>">确 定</a>
+    <a class="u-btn-cancel s-btn-cancel">取 消</a>
+</div>

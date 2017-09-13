@@ -1,0 +1,98 @@
+<form method="post" id="other-white-lists-setting" onsubmit="return false;" autocomplete="off">
+    <div class="m-panel s-panel">
+        <div class="m-panel-title s-panel-title">
+            <span class="u-panel-title-son">常规设置</span>
+            <b class="icon-tab-right"></b>
+        </div>
+        <div class="m-panel-body">
+            <div class="m-panel-item s-panel-item">
+                <div class="u-setting4">
+                    <ul class="u-setting-li">
+                        <li>
+                            <label><span class="u-business-span-width f-w" style="letter-spacing: 53px;">角色</span>
+                                <input type="text" class="u-panel-input1" name="role_id" id="u-role-select" required>
+                            </label>
+                        </li>
+                        <li>
+                            <span class="u-business-span-width f-w3">发件箱设置</span>
+                            <label>
+                                <input type="radio" checked class="f-input-align" name="keep_sent" value="0">
+                                <span>删除 </span>
+                            </label>
+                            <label class="f-ml15">
+                                <input type="radio" class="f-input-align" name="keep_sent" value="1">
+                                <span>保留</span>
+                            </label>
+                        </li>
+                        <li>
+                            <span class="u-business-span-width">发件人白名单</span>
+                            <label>
+                                <input type="radio" checked="checked" data-link="sender" class="f-input-align u-checked-default" name="SENDER_HANDLER">
+                                <span>开启</span>
+                            </label>
+                            <label class="f-ml15">
+                                <input type="radio" class="f-input-align" name="SENDER_HANDLER" >
+                                <span>禁止</span>
+                            </label>
+                        </li>
+                        <li data-link="sender">
+                            <div class="triangle-control f-fl f-mr5">
+                                <div class="u-edit-white-list-triangle">
+                                    <em class="triangle1-top f-pa"></em>
+                                    <span class="triangle1-bottom f-pa"></span>
+                                </div>
+                                <div class="u-email-content  u-smarty-textarea" id="sender-white-list"></div>
+                                <input type="hidden" data-input="true" name="from_white_list"/>
+                                <label data-msg="true" class="error"></label>
+                            </div>
+                            <input type="file" id="import-sender-list-file" name="file"/>
+                            <button class="u-panel-button f-db" id="import-sender-list">导入</button>
+                            <button class="u-panel-button" id="export-sender-list">导出</button>
+                            <div class="f-cb"></div>
+                        </li>
+                        <li>
+                            <span class="u-business-span-width">收件人白名单 </span>
+                            <label>
+                                <input type="radio" checked="checked"  data-link="recipients" class="f-input-align u-checked-default" name="RECIPIENTS_HANDLER">
+                                <span>开启</span>
+                            </label>
+                            <label class="f-ml15">
+                                <input type="radio" class="f-input-align" name="RECIPIENTS_HANDLER">
+                                <span>禁止</span>
+                            </label>
+                        </li>
+                        <li data-link="recipients">
+                            <div class="triangle-control f-fl f-mr5">
+                                <div class="u-edit-white-list-triangle">
+                                    <em class="triangle1-top f-pa"></em>
+                                    <span class="triangle1-bottom f-pa"></span>
+                                </div>
+                                <div class="u-email-content  u-smarty-textarea" id="recipients-white-list"></div>
+                                <input type="hidden" data-input="true" name="to_white_list"/>
+                                <label data-msg="true" class="error"></label>
+                            </div>
+                            <button class="u-panel-button f-db" id="import-recipients-list">导入</button>
+                            <input type="file" id="recipients-white-list-file" name="file"/>
+                            <button class="u-panel-button" id="export-recipients-list">导出</button>
+                        </li>
+                        <li style="clear: both;">
+                            <span class="u-business-span-width f-w3">保留附件</span>
+                            <label>
+                                <input type="radio" class="f-input-align" name="log_attachemts" value="0">
+                                <span>删除 </span>
+                            </label>
+                            <label class="f-ml15">
+                                <input type="radio" checked class="f-input-align" name="log_attachemts" value="1">
+                                <span>保留</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="m-btn">
+    <a class="u-btn-ok s-btn-ok {~disable('SettingPageEdit')}" id="save-white-list">保 存</a>
+    <a class="u-btn-cancel s-btn-cancel {~disable('SettingPageEditAll')}">取 消</a>
+</div>

@@ -1,0 +1,762 @@
+<?php
+if(!defined("WOWOSTAR"))exit;
+Common::widget("Body")->commonHeader();
+Common::widget("Body")->commonTopMenu();
+?>
+<script>
+    window.LIMIT_CONTROLLER={
+        "EDIT":"<?php echo hasRight('SettingPageEdit');?>",
+        "EDIT_ALL":"<?php echo hasRight('SettingPageEditAll');?>",
+        "IS_ADMIN":"<?php echo isAdmin();?>"
+    };
+</script>
+<script src="/Resources/js/plugin/binfu/smartyTextArea.js"></script>
+<script src="/Resources/js/plugin/binfu/collapsePanel.js"></script>
+<link rel="stylesheet" href="/Resources/js/plugin/noUiSlider.7.0.9/jquery.nouislider.css">
+<link rel="stylesheet" href="/Resources/js/plugin/noUiSlider.7.0.9/jquery.nouislider.pips.css">
+<script src="/Resources/js/plugin/noUiSlider.7.0.9/jquery.nouislider.all.js"></script>
+<link rel="stylesheet" href="/Resources/js/plugin/switchery/switchery.css" />
+<script src="/Resources/js/plugin/switchery/switchery.js"></script>
+<script src="/Resources/js/plugin/binfu/timepicker.js"></script>
+
+<script src="/Resources/js/plugin/switchery/switchery.js"></script>
+<script src="/Resources/js/module/setting.js"></script>
+<div class="m-content">
+<!--左侧栏-->
+<div class="g-sd s-sd" id="menu-container-setting">
+</div>
+<!--左侧栏-->
+<!--右侧栏-->
+<div class="g-mn">
+<div class="" id="m-content-container-setting" style="margin-top: -2px;">
+<!--业务参数设置-->
+<div class="m-content-item m-content-item-form-setting " data-group="2">
+   <form id="business-setting" method="post" autocomplete="off">
+       <div class="m-panel s-panel">
+           <div class="m-panel-title s-panel-title">
+               <span class="u-panel-title-son">外发权限设置</span>
+              <b class="icon-tab-right"></b>
+           </div>
+           <div class="m-panel-body">
+               <div class="m-panel-item s-panel-item f-padding-bt20 u-file-out-setting">
+                   <ul class="m-panel-ul">
+                       <li>
+                           <span class="u-business-span1"><label><span class="u-business-span-width f-w6">有效时长：</span><input type="number" min="0" max="43200" maxlength="5" class="check_number u-panel-input1 f-input-padding" name="SS_FILEOUT_AVAILABLE_TIME" value="<?php echo (is_array($bs)?$bs["SS_FILEOUT_AVAILABLE_TIME"]:$bs->SS_FILEOUT_AVAILABLE_TIME); ?>"></label><span class="u-business-span2">分钟</span></span>
+                       </li>
+                       <li>
+                           <span class="u-business-span1">
+                               <label><span class="u-business-span-width f-w6">有效次数：</span><input type="number" min="0" max="100000" maxlength="6" class="check_number u-panel-input1 f-input-padding" name="SS_FILEOUT_AVAILABLE_TIMES" value="<?php echo (is_array($bs)?$bs["SS_FILEOUT_AVAILABLE_TIMES"]:$bs->SS_FILEOUT_AVAILABLE_TIMES); ?>">
+                                   <span class="u-business-span2">次</span></label>
+                           </span>
+                       </li>
+                   </ul>
+                   <ul class="m-panel-ul">
+                       <li>
+                           <span class="u-journal1"><input type="checkbox" class="f-input-align" id="u-setting1" name="SS_FILEOUT_PWD" <?php echo checkbox_checked('SS_FILEOUT_PWD',$bs);?> value="1"> <label for="u-setting1" >密码认证</label></span>
+                           <span class="u-journal1"><input type="checkbox" class="f-input-align" id="u-setting2" name="SS_FILEOUT_MACHINECODE" <?php echo checkbox_checked('SS_FILEOUT_MACHINECODE',$bs);?> value="1"><label for="u-setting2"> 机器认证</label></span>
+                           <span class="u-journal1"><input type="checkbox" class="f-input-align" id="u-setting3" name="SS_FILEOUT_MAKEEXE" <?php echo checkbox_checked('SS_FILEOUT_MAKEEXE',$bs);?> value="1"> <label for="u-setting3">制作EXE文件</label></span>
+                           <span class="u-journal1"><input type="checkbox" class="f-input-align" id="u-setting4" name="SS_FILEOUT_AUTODEL" <?php echo checkbox_checked('SS_FILEOUT_AUTODEL',$bs);?> value="1"> <label for="u-setting4">失效文件删除</label></span>
+                       </li>
+                       <li>
+                           <span class="u-journal1"><input type="checkbox" class="f-input-align" id="u-setting5" name="SS_FILEOUT_MODIFY" <?php echo checkbox_checked('SS_FILEOUT_MODIFY',$bs);?> value="1"> <label for="u-setting5">文件修改</label></span>
+                           <span class="u-journal1"><input type="checkbox" class="f-input-align" id="u-setting6" name="SS_FILEOUT_PRINT" <?php echo checkbox_checked('SS_FILEOUT_PRINT',$bs);?> value="1"><label for="u-setting6"> 文件打印</label></span>
+                           <span class="u-journal1"><input type="checkbox" class="f-input-align" id="u-setting7" name="SS_FILEOUT_SHOWREMAINTIME" <?php echo checkbox_checked('SS_FILEOUT_SHOWREMAINTIME',$bs);?> value="1"><label for="u-setting7"> 浏览显示剩余时间</label></span>
+                       </li>
+                   </ul>
+
+               </div>
+           </div>
+       </div>
+       <div class="m-panel s-panel">
+           <div class="m-panel-title s-panel-title">
+               <span class="u-panel-title-son">其他权限设置</span>
+               <b class="icon-tab-right"></b>
+           </div>
+           <div class="m-panel-body">
+               <div class="m-panel-item s-panel-item f-padding-bt50">
+                   <ul class="m-panel-ul" style="margin-top: 10px;">
+                       <li class="">
+                           <label>
+                               <span class="u-business-span4">短期离线时长：</span>
+                               <input type="number" min="10" max="43200" class="check_number u-panel-input1 f-input-padding" name="OfflineShortTime" value="<?php echo (is_array($bs)?$bs["OfflineShortTime"]:$bs->OfflineShortTime); ?>">
+                               <span class="u-business-span2">分钟</span>
+                           </label>
+                       </li>
+                       <li class="">
+                           <label>
+                               <span class="u-business-span4">允许拷贝次数：</span>
+                               <input type="number" min="1" class="check_number u-panel-input1 f-input-padding" name="CopyCount" value="<?php echo (is_array($bs)?$bs["CopyCount"]:$bs->CopyCount); ?>" id="u-copy-count">
+                               <span class="u-business-span2">次</span>
+                           </label>
+                       </li>
+                       <li class="">
+                           <label>
+                               <span class="u-business-span4">单次拷贝长度：</span>
+                               <input type="number" min="1" class="check_number u-panel-input1 f-input-padding" name="CopyLength" value="<?php echo (is_array($bs)?$bs["CopyLength"]:$bs->CopyLength); ?>" id="u-copy-length">
+                               <span class="u-business-span2">字/字母</span>
+                           </label>
+                       </li>
+                       <li class="">
+                          <label>
+                              <span class="u-business-span4 f-w6">水印设置：</span>
+                              <span style="color: #808183">（例："%logname%"，"%displayname%"，"%printtime%","%groupname%"）</span>
+                              <textarea type="text" class="u-panel-input1 f-align-input" name="WaterMarkStr"><?php echo (is_array($bs)?$bs["WaterMarkStr"]:$bs->WaterMarkStr); ?></textarea>
+                          </label>
+                       </li>
+
+
+                   </ul>
+               </div>
+           </div>
+       </div>
+   </form>
+    <div class="m-btn">
+        <a class="u-btn-ok s-btn-ok <?php disable('SettingPageEdit');?>" id="save-business-btn">保 存</a>
+        <a class="u-btn-cancel s-btn-cancel <?php disable('SettingPageEditAll');?>">重 置</a>
+    </div>
+</div>
+<!--业务参数设置-->
+<!--日志参数设置-->
+<div class="m-content-item m-content-item-form-setting " data-group="3">
+    <div class="m-panel s-panel">
+        <div class="m-panel-title s-panel-title">
+            <span class="u-panel-title-son">客户端日志设置</span>
+            <b class="icon-tab-right"></b>
+        </div>
+        <div class="m-panel-body">
+            <div class="m-panel-item s-panel-item">
+                <ul class="m-panel-ul">
+                    <li class="f-ib">
+                        <span class="u-journal1"><input type="checkbox"> 显示登录账号</span>
+                        <span class="u-journal1"><input type="checkbox"> 显示登录IP地址</span>
+                        <span class="u-journal1"><input type="checkbox"> 显示登陆用户名</span>
+                        <span class="u-journal1"><input type="checkbox"> 显示终端MAC地址</span>
+                    </li>
+                    <li>
+                        <span class="u-journal1"><input type="checkbox"> 显示操作类型</span>
+                        <span class="u-journal1"><input type="checkbox"> 显示操作时间</span>
+                        <span class="u-journal1"><input type="checkbox"> 显示备注信息</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="m-panel s-panel">
+        <div class="m-panel-title s-panel-title">
+            <span class="u-panel-title-son">流程日志设置</span>
+            <b class="icon-tab-right"></b>
+        </div>
+        <div class="m-panel-body">
+            <div class="m-panel-item s-panel-item">
+                <ul class="m-panel-ul">
+                    <li class="f-ib">
+                        <span class="u-journal1"><input type="checkbox"> 显示登陆账号</span>
+                        <span class="u-journal1"><input type="checkbox"> 显示流程名称</span>
+                        <span class="u-journal1"><input type="checkbox"> 显示流程描述</span>
+                        <span class="u-journal1"><input type="checkbox"> 显示流程发起人</span>
+                    </li>
+                    <li>
+                        <span class="u-journal1"><input type="checkbox"> 显示流程运行时间</span>
+                        <span class="u-journal1"><input type="checkbox"> 显示操作时间</span>
+                        <span class="u-journal1"><input type="checkbox"> 显示流程结果</span>
+                        <span class="u-journal1"><input type="checkbox"> 显示流程结束时间</span>
+                    </li>
+                    <li>
+                        <span class="u-journal1"><input type="checkbox"> 显示流程步骤</span>
+                        <span class="u-journal1"><input type="checkbox"> 显示流程审批方式</span>
+                        <span class="u-journal1"><input type="checkbox"> 显示路程审批说明</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="m-panel s-panel">
+        <div class="m-panel-title s-panel-title">
+            <span class="u-panel-title-son">管理员日志设置</span>
+            <b class="icon-tab-right"></b>
+        </div>
+        <div class="m-panel-body">
+            <div class="m-panel-item s-panel-item">
+                <ul class="m-panel-ul">
+                    <li class="f-ib">
+                        <span class="u-journal1"><input type="checkbox"> 显示登陆账号</span>
+                        <span class="u-journal1"><input type="checkbox"> 显示登陆IP地址</span>
+                        <span class="u-journal1"><input type="checkbox"> 显示终端MAC地址</span>
+                        <span class="u-journal1"><input type="checkbox"> 显示登陆用户名</span>
+                    </li>
+                    <li>
+                        <span class="u-journal1"><input type="checkbox"> 显示操作类型</span>
+                        <span class="u-journal1"><input type="checkbox"> 显示操作时间</span>
+                        <span class="u-journal1"><input type="checkbox"> 显示备注信息</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="m-btn">
+        <a class="u-btn-ok s-btn-ok <?php disable('SettingPageEdit');?>">保 存</a>
+        <a class="u-btn-cancel s-btn-cancel <?php disable('SettingPageEditAll');?>">重 置</a>
+    </div>
+</div>
+<!--业务参数设置-->
+<!--流程参数配置-->
+<div class="m-content-item m-content-item-form-setting " data-group="special">
+    <form method="post" autocomplete="off" id="process-setting">
+    <div class="m-panel s-panel">
+        <div class="m-panel-title s-panel-title">
+            <span class="u-panel-title-son">审批方式设置</span>
+            <b class="icon-tab-right"></b>
+        </div>
+        <div class="m-panel-body">
+            <div class="m-panel-item s-panel-item">
+                <ul class="u-setting-approval-way">
+                    <li>
+                        <span class="u-setting-approval-way-grade" >流程名称</span>
+                            <input class="u-panel-input1 f-dn" id="SS_APPROVAL_TYPE" value="" readonly="readonly"/>
+                            <input name="SS_APPROVAL_TYPE" type="hidden" disableclear="true"/>
+                            <input class="u-panel-input1"  id="SS_APPROVAL_ITEM" required name="guid">
+                        <input name="isAdd" type="hidden" value="0" disableclear="true">
+                        <input name="hasDefault" type="hidden" value="0" disableclear="true">
+                    </li>
+                    <li>
+                        <span class="u-setting-approval-way-grade" style="margin-right: 21px;">审批级别</span>
+                        <ul class="u-setting-approval-way-grade-ul" id="u-process-info-panel"> </ul>
+                                <?php
+                                /**
+                                 * 流程节点radio
+                                 */
+                                $nodeTotal = 3;
+                                for($a=0;$a<$nodeTotal;$a++)
+                                {
+                                    $temp = '<label class="f-width110"><input type="radio" name="SS_APPROVAL_LEVEL"  value="%1$u" class="f-input-align">%1$u个节点</label>';
+                                    echo sprintf($temp,($a+1));
+                                }
+                                ?>
+                                <!--<label class="f-width80"><input type="radio" name="SS_APPROVAL_LEVEL"  value="1" class="f-input-align" id="u-setting-process4">1个节点</label>
+                                <label class="f-width80"><input type="radio" name="SS_APPROVAL_LEVEL"  value="2" class="f-input-align" id="u-setting-process5">2个节点</label>
+                                <label><input type="radio" name="SS_APPROVAL_LEVEL"  value="3"  class="f-input-align" id="u-setting-process6">3个节点</label>-->
+                    </li>
+                    <li>
+                        <span class="u-setting-approval-way-grade">审批方式</span>
+                        <label class="f-width160"><input type="radio" name="SS_APPROVAL_HANDLER" value="1"  class="f-input-align">指定审批</label>
+                        <label><input type="radio" name="SS_APPROVAL_HANDLER" value="2" class="f-input-align">循环审批</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="m-panel s-panel u-panel-relative">
+        <div class="m-panel-title s-panel-title">
+            <span class="u-panel-title-son">解密节点属性设置</span>
+            <b class="icon-tab-right"></b>
+        </div>
+        <div class="m-panel-body">
+            <div class="m-panel-item s-panel-item">
+                <div class="u-decryption-sp">
+                    <span class="u-process-num">
+                        <img src="/Resources/images/version1/icon-set1.png">
+                    </span>
+                <span class="u-setting-Approval-span">适用流程人员</span>
+                </div>
+                       <div >
+                           <span class="u-process-text">
+                           <ul class="u-setting-node-property">
+
+                               <li>
+                                   <span class="u-setting-node-property-way-panel f-dn">
+                                       <label>
+                                           <input type="checkbox" name="SS_APPROVAL_DEFAULT" class="f-input-align">
+                                           <span>设置为默认流程</span>
+                                       </label>
+                                   </span>
+                               </li>
+                               <li>
+                                   <span class="u-setting-node-property-way-panel">选择人员/部门</span>
+                                   <span class="u-setting-node-property-way-panel">
+                                       <label>
+                                           <!--<span class="u-setting-node-span1">人员</span>-->
+                                           <input type="text" name="SS_APPROVAL_AUDI" id="SS_APPROVAL_AUDI" class="u-panel-input2 u-select-user u-select-user2" style="margin-left: -10px;">
+                                       </label>
+                                   </span><!--
+                                   <span class="u-setting-node-property-way-panel">
+                                       <label>
+                                           <span class="u-setting-node-span1">用户组</span>
+                                           <input type="text"  name="SS_APPROVAL_GROUP"  class="u-panel-input2 u-select-group">
+                                       </label>
+                                   </span>-->
+                                   <span class="u-setting-node-property-way-panel f-dn">
+                                       <label>
+                                           <span class="u-setting-node-span1">角色等级</span>
+                                           <input type="text" name="SS_APPROVAL_ROLE"  class="u-panel-input2" id="u-role-level">
+                                           <!--<select name="SS_APPROVAL_ROLE" style="display: inline-block;" class="u-panel-input2">
+                                               <option value="">缺省</option>
+                                               <option value="1">一级</option>
+                                               <option value="2">二级</option>
+                                               <option value="3">三级</option>
+                                           </select>-->
+                                       </label>
+                                   </span>
+                                   <a id="u-clear-prev" class="u-text-btn">清空</a>
+                               </li>
+                               <li>
+                                   <span class="u-setting-node-property-way-panel">
+                                       <label><span class="u-setting-node-span1" style="margin-right: 5px;letter-spacing: 1px;">审批等待时间</span>
+                                           <input type="number" min="1" max="1440" name="SS_APPROVAL_WAIT_TIME" class="u-panel-input1 f-input-padding" required style="width:190px;">
+                                       </label>
+                                       <span>分钟<span style="margin-left: 5px;">(1-1440分钟）</span></span>
+                                   </span>
+                               </li>
+                               <li id="u-audi-wait-time">
+                                   <span class="u-setting-node-property-way-panel">
+                                       <label><span class="u-setting-node-span1" style="margin-right: 5px;letter-spacing: 1px;">循环等待时间</span>
+                                           <input type="number" min="1" max="1440" name="SS_APPROVAL_AUDI_WAIT_TIME" class="u-panel-input1 f-input-padding" required style="width:190px;">
+                                       </label>
+                                       <span>分钟<span style="margin-left: 5px;">(1-1440分钟）</span></span>
+                                   </span>
+                               </li>
+                           </ul>
+                       </span></div>
+            </div>
+            <div id="u-step-container"></div>
+            <!--<div class="m-panel-item s-panel-item u-process-step">
+                       <span class="u-process-num">
+                           <img src="/Resources/images/version1/icon-set4.png">
+                       </span>
+                       <span class="u-process-text">
+                           <ul class="u-setting-node-property">
+                               <li>
+                                   <span class="u-setting-node-property-way-panel">节点审批方式:</span>
+                                   <span class="u-setting-node-property-way-panel">
+                                       <label><input type="radio" class="f-input-align u-step-handler-auto" data-group="step1" name="SS_APPROVAL_HANDLER_STEP1"  value="1" id="u-setting-process7" >默认</label></span>
+                                   <span class="u-setting-node-property-way-panel">
+                                       <label><input type="radio" class="f-input-align u-step-handler-custom" data-group="step1" name="SS_APPROVAL_HANDLER_STEP1" value="2" id="u-setting-process8">自定义审批人/部门</label></span>
+                               </li>
+                               <li class="u-step-handler-audi" data-group="step1">
+                                   <span class="u-setting-node-property-way-panel">节点审批人员:</span>
+                                   <span class="u-setting-node-property-way-panel">
+                                       <label><input type="text" name="SS_APPROVAL_HANDLER_STEP1_AUDI_1" class="u-panel-input2 u-select-user u-select-user1"></label>
+                                   </span>
+                                   <span class="u-setting-node-property-way-panel u-step-audi-ext">
+                                       <label><input type="text" name="SS_APPROVAL_HANDLER_STEP1_AUDI_2" class="u-panel-input2 u-select-user u-select-user1"></label>
+                                   </span>
+                                   <span class="u-setting-node-property-way-panel u-step-audi-ext">
+                                       <label><input type="text" name="SS_APPROVAL_HANDLER_STEP1_AUDI_3" class="u-panel-input2 u-select-user u-select-user1"></label>
+                                   </span>
+                               </li>
+                               <li>
+                                   <span class="u-setting-node-property-way-panel">节点滞留超时自动处理方式:</span>
+                                   <span class="u-setting-node-property-way-panel">
+                                       <label><input type="radio" class="f-input-align" name="SS_APPROVAL_HANDLER_STEP1_LIMIT" value="1"    id="u-setting-process9">通过</label></span>
+                                   <span class="u-setting-node-property-way-panel">
+                                       <label><input type="radio" class="f-input-align" name="SS_APPROVAL_HANDLER_STEP1_LIMIT" value="2" id="u-setting-process-9">驳回</label>
+                                   </span>
+                               </li>
+                           </ul>
+                       </span>
+            </div>
+            <div class="m-panel-item s-panel-item u-process-step">
+                       <span class="u-process-num">
+                           <img src="/Resources/images/version1/icon-set2.png">
+                       </span>
+                       <span class="u-process-text">
+                           <ul class="u-setting-node-property">
+                               <li>
+                                   <span class="u-setting-node-property-way-panel">节点审批方式:</span>
+                                   <span class="u-setting-node-property-way-panel">
+                                       <label><input type="radio" name="SS_APPROVAL_HANDLER_STEP2"  value="1" data-group="step2" class="f-input-align u-step-handler-auto" id="u-setting-process10">默认</label></span>
+                                   <span class="u-setting-node-property-way-panel">
+                                       <label><input type="radio" name="SS_APPROVAL_HANDLER_STEP2"  value="2" data-group="step2" class="f-input-align u-step-handler-custom" id="u-setting-process11">自定义审批人/部门</label></span>
+                               </li>
+                               <li class="u-step-handler-audi" data-group="step2">
+                                   <span class="u-setting-node-property-way-panel">节点审批人员:</span>
+                                   <span class="u-setting-node-property-way-panel">
+                                       <label><input type="text" name="SS_APPROVAL_HANDLER_STEP2_AUDI_1" class="u-panel-input2 u-select-user u-select-user1"></label>
+                                   </span>
+                                   <span class="u-setting-node-property-way-panel u-step-audi-ext"><label><input type="text" name="SS_APPROVAL_HANDLER_STEP2_AUDI_2" class="u-panel-input2 u-select-user u-select-user1"></label></span>
+                                   <span class="u-setting-node-property-way-panel u-step-audi-ext"><label><input type="text" name="SS_APPROVAL_HANDLER_STEP2_AUDI_3" class="u-panel-input2 u-select-user u-select-user1"></label></span>
+                               </li>
+                               <li>
+                                   <span class="u-setting-node-property-way-panel">节点滞留超时自动处理方式:</span>
+                                   <span class="u-setting-node-property-way-panel">
+                                       <label><input type="radio" name="SS_APPROVAL_HANDLER_STEP2_LIMIT" value="1"    class="f-input-align" id="u-setting-process12">通过</label></span>
+                                   <span class="u-setting-node-property-way-panel">
+                                       <label><input type="radio" name="SS_APPROVAL_HANDLER_STEP2_LIMIT" value="2" class="f-input-align" id="u-setting-process13">驳回</label></span>
+                               </li>
+                           </ul>
+                       </span>
+            </div>
+            <div class="m-panel-item s-panel-item u-process-step">
+                       <span class="u-process-num">
+                           <img src="/Resources/images/version1/icon-set3.png">
+                       </span>
+                       <span class="u-process-text">
+                           <ul class="u-setting-node-property">
+                               <li>
+                                   <span class="u-setting-node-property-way-panel">节点审批方式:</span>
+                                   <span class="u-setting-node-property-way-panel">
+                                       <label><input type="radio" name="SS_APPROVAL_HANDLER_STEP3"  value="1" data-group="step3" class="f-input-align u-step-handler-auto" id="u-setting-process14">默认</label></span>
+                                   <span class="u-setting-node-property-way-panel">
+                                       <label><input type="radio" name="SS_APPROVAL_HANDLER_STEP3" value="2" data-group="step3" class="f-input-align u-step-handler-custom" id="u-setting-process15">自定义审批人/部门</label></span>
+                               </li>
+                               <li class="u-step-handler-audi" data-group="step3">
+                                   <span class="u-setting-node-property-way-panel">节点审批人员:</span>
+                                   <span class="u-setting-node-property-way-panel"><label><input type="text" name="SS_APPROVAL_HANDLER_STEP3_AUDI_1" class="u-panel-input2 u-select-user u-select-user1"></label></span>
+                                   <span class="u-setting-node-property-way-panel u-step-audi-ext"><label><input type="text" name="SS_APPROVAL_HANDLER_STEP3_AUDI_2" class="u-panel-input2 u-select-user u-select-user1"></label></span>
+                                   <span class="u-setting-node-property-way-panel u-step-audi-ext"><label><input type="text" name="SS_APPROVAL_HANDLER_STEP3_AUDI_3" class="u-panel-input2 u-select-user u-select-user1"></label></span>
+                               </li>
+                               <li>
+                                   <span class="u-setting-node-property-way-panel">节点滞留超时自动处理方式:</span>
+                                   <span class="u-setting-node-property-way-panel">
+                                       <label><input type="radio" name="SS_APPROVAL_HANDLER_STEP3_LIMIT" value="1"  class="f-input-align" id="u-setting-process16">通过</label></span>
+                                   <span class="u-setting-node-property-way-panel">
+                                       <label><input type="radio" name="SS_APPROVAL_HANDLER_STEP3_LIMIT" value="2" class="f-input-align" id="u-setting-process17">驳回</label></span>
+                               </li>
+                           </ul>
+                       </span>
+            </div>-->
+
+        </div>
+    </div>
+    </form>
+    <div class="m-btn">
+        <a class="u-btn-ok s-btn-ok <?php disable('SettingPageEdit');?>" id="save-process-btn">保 存</a>
+        <a class="u-btn-cancel s-btn-cancel <?php disable('SettingPageEditAll');?>">重 置</a>
+    </div>
+</div>
+<!--流程参数设置-->
+<!--域参数设置-->
+<div class="m-content-item m-content-item-form-setting " data-group="5">
+	<form method="post" autocomplete="off" id="ads-setting">
+    <div class="m-panel s-panel">
+        <div class="m-panel-title s-panel-title">
+            <span class="u-panel-title-son">域参数设置</span>
+            <b class="icon-tab-right"></b>
+        </div>
+        <div class="m-panel-body">
+            <div class="m-panel-item s-panel-item">
+                <div class="u-setting4">
+                    <ul class="u-setting-li">
+                        <li>
+                            <label>
+                                <span class="u-setting-span1 f-width">域服务器地址</span>
+                                <input type="text" class="u-panel-input " id="u-setting-others6" name="AdsSvIP" value="<?php echo (is_array($ads)?$ads["AdsSvIP"]:$ads->AdsSvIP); ?>">
+                            </label>
+
+                        </li>
+                        <li>
+                            <label>
+                                <span class="u-setting-span1 f-width f-w12">域DNS</span>
+                                <input type="text" class="u-panel-input " name="AdsDns" value="<?php echo (is_array($ads)?$ads["AdsDns"]:$ads->AdsDns); ?>">
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <span class="u-setting-span1 f-width  f-w3">域登录账号</span>
+                                <input type="text" class="u-panel-input " id="u-setting-others7" name="LogName" value="<?php echo (is_array($ads)?$ads["LogName"]:$ads->LogName); ?>">
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <span class="u-setting-span1 f-width f-w3">域登陆密码</span>
+                                <input type="password" autocomplete="off" class="u-panel-input " id="u-setting-others8" name="PassWord" value="<?php echo (is_array($ads)?$ads["PassWord"]:$ads->PassWord); ?>">
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+     </form>
+    <div class="m-btn">
+        <a class="u-btn-ok s-btn-ok <?php disable('SettingPageEdit');?>" id="save-ads-btn">保 存</a>
+        <a class="u-btn-cancel s-btn-cancel <?php disable('SettingPageEditAll');?>">重 置</a>
+    </div>
+</div>
+<!--域参数配置-->
+<!--邮件白名单配置-->
+<div class="m-content-item m-content-item-form-setting f-full-show "  data-group="6">
+        <div class="m-mn-top s-mn-top" >
+            <div >
+                <table class="u-panel-table-top">
+                    <tr class="u-panel-table-top-tr">
+                        <td>
+                            <a class="u-main-toolbar-btn <?php disable('SettingPageEdit');?>" id="add-white-list">
+                                <i class="icon-add icon-common"></i>
+                                <span class="pl-panel f-w0">新增</span>
+                            </a>
+                        </td>
+                        <td class="f-margin-left1">
+                            <a class="u-main-toolbar-btn <?php disable('SettingPageEdit');?>" id="edit-white-list">
+                                <i class="icon-edit icon-common"></i>
+                                <span class="pl-panel f-w0">修改</span>
+                            </a>
+                        </td>
+                        <td class="f-margin-left1">
+                            <a class="u-main-toolbar-btn <?php disable('SettingPageEdit');?>" id="del-white-list">
+                                <i class="icon-del icon-common"></i>
+                                <span class="pl-panel f-w0">删除</span>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="m-content-container">
+            <div class="m-content-item m-content-item-list">
+                <div class="u-ajax-table-container" id="u-ajax-table-container-white-list"></div>
+                <div class="u-page-toolbar" id="u-page-toolbar-white-list">
+                    <?php Common::widget("Page")->pageToolbar();?>
+                </div>
+            </div>
+        </div>
+    <!--添加编辑白名单-->
+</div>
+
+<!--邮件白名单配置-->
+<!--其他参数设置-->
+<div class="m-content-item m-content-item-form-setting "  data-group="7">
+    <form method="post" autocomplete="off" onsubmit="return false;" id="other-configuration-parameters">
+        <div class="m-panel s-panel">
+            <div class="m-panel-title s-panel-title">
+                <span class="u-panel-title-son">其他参数设置</span>
+                <b class="icon-tab-right"></b>
+            </div>
+            <div class="m-panel-body">
+                <div class="m-panel-item s-panel-item" style="height: 65px">
+                    <div class="u-setting4">
+                        <ul class="u-setting-li">
+                            <li>
+                                <div class="backup-setting-label">
+                                    <span class="u-business-span-width">自动加密</span>
+                                    <span>
+                                        <input type="checkbox" class="switch_time" id="switch_time" name="switch_time" <?php echo $protectFile[TickTime]>0?'checked':'';?> />
+                                    </span>
+
+                                    <div class="slider-time" id="slider-time" style="width: auto">
+                                     <span>时间间隔</span>
+                                    <input type="text" class="u-panel-input1"  id="TickTime"  readonly="readonly" name="TickTime" value="<?php echo (intval(is_array($protectFile)?$protectFile["TickTime"]:$protectFile->TickTime)); ?>" >
+                                    <div  class="slider-setting" min="1" max="15" step="1" start="<?php echo (intval(is_array($protectFile)?$protectFile["TickTime"]:$protectFile->TickTime)); ?>"></div>
+                                    <span>分</span><!--<span style="font-size: 12px;color: #9F9F9F">(注：最小值为1秒)</span>-->
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="m-panel s-panel">
+            <div class="m-panel-title s-panel-title">
+                <span class="u-panel-title-son">启用备份</span>
+                <b class="icon-tab-right"></b>
+            </div>
+            <div class="m-panel-body">
+                <div class="m-panel-item s-panel-item">
+                <div class="u-setting4">
+                    <ul class="u-setting-li">
+                        <li>
+                            <div class="backup-setting-label">
+                                <span class="u-business-span-width">编辑备份</span>
+                                <span>
+                                    <input type="checkbox" class="js-switch" id="EBackFile" name="EBackFile"
+                                           value="1" <?php echo !empty($fileBack['EBackFile'])?'checked':'';?> />
+                                </span>
+                            </div>
+                            <div class="backup-setting-label">
+                                <span class="u-business-span-width">删除备份</span>
+                                <span><input type="checkbox" class="js-switch" id="DBackFile" name="DBackFile" value="1" <?php echo !empty($fileBack['DBackFile'])?'checked':'';?> /></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="m-panel s-panel <?php echo !empty($fileBack['EBackFile'])|| !empty($fileBack['DBackFile'])?'':'f-dn';?>" id="u-common-backup-setting">
+            <div class="m-panel-title s-panel-title">
+                <span class="u-panel-title-son">备份空间设置</span>
+                <b class="icon-tab-right"></b>
+            </div>
+            <div class="m-panel-body">
+                <div class="m-panel-item s-panel-item">
+                    <div class="u-setting4">
+                        <ul class="u-setting-li">
+                            <li>
+                                <div class="backup-setting-label"><span class="u-business-span-width">备份占用空间</span>
+                                    <input type="text" readonly="readonly" class="u-panel-input1" name="ESentensPer" value="<?php echo (intval(is_array($fileBack)?$fileBack["ESentensPer"]:$fileBack->ESentensPer)); ?>" />
+                                    <div  class="slider-setting" min="5" max="10" step="1" start="<?php echo (intval(is_array($fileBack)?$fileBack["ESentensPer"]:$fileBack->ESentensPer)); ?>"></div>
+                                    <span>%</span>
+                                </div>
+                            </li>
+                            <!--<li>
+                                <label><span class="u-business-span-width">最大备份文件</span>
+                                    <input type="text" class="u-panel-input1" name="NMaxSize" value="<?php echo (is_array($fileBack)?$fileBack["NMaxSize"]:$fileBack->NMaxSize); ?>"></label>
+                                <span>M</span>
+                            </li>-->
+                            <!--<li>
+                                <label class="backup-setting-label"><span class="u-business-span-width">备份时间间隔</span>
+                                    <input type="hidden" class="u-panel-input1" name="NIntervalTime" value="<?php echo (is_array($fileBack)?$fileBack["NIntervalTime"]:$fileBack->NIntervalTime); ?>">
+                                    <div  class="slider-setting" min="1" max="8" step="1" start="<?php echo (is_array($fileBack)?$fileBack["NIntervalTime"]:$fileBack->NIntervalTime); ?>"></div>
+                                    <span>小时</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label><span class="u-business-span-width f-ib f-vat">共享备份类型</span>
+                                    <div class="u-smarty-textarea setting-smartiy-textarea"></div>
+                                    <input type="hidden" data-input="true" name="NSuffix" value='<?php echo (implode(",",is_array($fileBack)?$fileBack["NSuffix"]:$fileBack->NSuffix)); ?>'><p data-msg="true" class="u-smarty-textarea-msg"></p>
+                                    </label>
+                            </li>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="m-panel s-panel <?php echo !empty($fileBack['EBackFile'])?'':'f-dn';?>"  id="u-edit-backup-setting">
+            <div class="m-panel-title s-panel-title">
+                <span class="u-panel-title-son">本地编辑备份</span>
+                <b class="icon-tab-right"></b>
+            </div>
+            <div class="m-panel-body">
+                <div class="m-panel-item s-panel-item">
+                    <div class="u-setting4">
+                        <ul class="u-setting-li">
+                            <!--<li>
+                                <label><span class="u-business-span-width">最大备份文件</span>
+                                    <input type="text" class="u-panel-input1" name="EMaxSize" value="<?php echo (is_array($fileBack)?$fileBack["EMaxSize"]:$fileBack->EMaxSize); ?>"></label>
+                                <span>M</span>
+                                <div id="EMaxSizeSlider" class="u-panel-input1"></div>
+                            </li>-->
+                            <li>
+                                <div class="backup-setting-label"><span class="u-business-span-width">备份时间间隔</span>
+                                    <input type="text" readonly="readonly" class="u-panel-input1" name="EIntervalTime" value="<?php echo (intval(is_array($fileBack)?$fileBack["EIntervalTime"]:$fileBack->EIntervalTime)); ?>">
+                                    <div  class="slider-setting" min="1" max="8" step="1" start="<?php echo (intval(is_array($fileBack)?$fileBack["EIntervalTime"]:$fileBack->EIntervalTime)); ?>"></div>
+                                    <span>小时</span>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="backup-setting-label"><span class="u-business-span-width">备份储存时间</span>
+                                    <input  type="text" readonly="readonly" class="u-panel-input1" name="EDelTime"  value="<?php echo (intval(is_array($fileBack)?$fileBack["EDelTime"]:$fileBack->EDelTime)); ?>">
+                                    <div  class="slider-setting" min="1" max="3" step="1" start="<?php echo (intval(is_array($fileBack)?$fileBack["EDelTime"]:$fileBack->EDelTime)); ?>"></div>
+                                    <span> 天</span>
+                                </div>
+
+                            </li>
+                            <li>
+                                <label><span class="u-business-span-width f-ib f-vat">编辑备份类型</span>
+                                    <div class="u-smarty-textarea setting-smartiy-textarea"></div>
+                                    <input type="hidden" data-input="true" name="ESuffix" value='<?php echo (implode(",",is_array($fileBack)?$fileBack["ESuffix"]:$fileBack->ESuffix)); ?>'><p data-msg="true" class="u-smarty-textarea-msg"></p>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="m-panel s-panel <?php echo !empty($fileBack['DBackFile'])?'':'f-dn';?>"  id="u-del-backup-setting">
+            <div class="m-panel-title s-panel-title">
+                <span class="u-panel-title-son">本地删除备份</span>
+                <b class="icon-tab-right"></b>
+            </div>
+            <div class="m-panel-body">
+                <div class="m-panel-item s-panel-item">
+                    <div class="u-setting4">
+                        <ul class="u-setting-li">
+                            <!--<li>
+                                <label><span class="u-business-span-width">最大备份文件</span>
+                                    <input type="text" class="u-panel-input1" name="DMaxSize" value="<?php echo (is_array($fileBack)?$fileBack["DMaxSize"]:$fileBack->DMaxSize); ?>"></label>
+                                <span>M</span>
+                            </li>-->
+                            <!--<li>
+                                <div class="backup-setting-label"><span class="u-business-span-width">备份时间间隔</span>
+                                    <input  type="text" readonly="readonly" class="u-panel-input1" name="DIntervalTime" value="<?php echo (intval(is_array($fileBack)?$fileBack["DIntervalTime"]:$fileBack->DIntervalTime)); ?>">
+                                    <div  class="slider-setting" min="1" max="8" step="1" start="<?php echo (intval(is_array($fileBack)?$fileBack["DIntervalTime"]:$fileBack->DIntervalTime)); ?>"></div>
+                                    <span>小时</span>
+                                </div>
+                            </li>-->
+                            <!--<li>
+                                <label class="backup-setting-label"><span class="u-business-span-width">备份占用空间</span>
+                                    <input type="hidden" class="u-panel-input1" name="DSentensPer" value="<?php echo (is_array($fileBack)?$fileBack["DSentensPer"]:$fileBack->DSentensPer); ?>">
+                                    <div  class="slider-setting" min="5" max="10" step="1" start="<?php echo (is_array($fileBack)?$fileBack["DSentensPer"]:$fileBack->DSentensPer); ?>"></div>
+                                    <span>%</span>
+                                </label>
+                            </li>-->
+                            <li>
+                                <div class="backup-setting-label">
+                                    <span class="u-business-span-width">备份储存时间</span>
+                                    <input type="text" readonly="readonly" class="u-panel-input1" name="DDelTime"  value="<?php echo (intval(is_array($fileBack)?$fileBack["DDelTime"]:$fileBack->DDelTime)); ?>">
+                                    <div  class="slider-setting" min="1" max="3" step="1" start="<?php echo (intval(is_array($fileBack)?$fileBack["DDelTime"]:$fileBack->DDelTime)); ?>"></div>
+                                    <span> 天</span>
+                                </div>
+
+                            </li>
+                            <li>
+                                <label>
+                                    <span class="u-business-span-width f-ib f-vat">删除备份类型</span>
+                                    <div class="u-smarty-textarea setting-smartiy-textarea"></div>
+                                    <input type="hidden" data-input="true" name="DSuffix" value='<?php echo (implode(",",is_array($fileBack)?$fileBack["DSuffix"]:$fileBack->DSuffix)); ?>'><p data-msg="true" class="u-smarty-textarea-msg"></p>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+    <div class="m-btn">
+        <a class="u-btn-ok s-btn-ok <?php disable('SettingPageEdit');?>" id="save-other-btn">保 存</a>
+        <a class="u-btn-cancel s-btn-cancel <?php disable('SettingPageEditAll');?>">重 置</a>
+    </div>
+</div>
+<!--其他参数设置-->
+<div class="m-content-item m-ajax-form "></div>
+
+<!--工作模式设置-->
+<div class="m-content-item m-content-item-form-setting f-full-show"  data-group="8">
+    <div class="m-mn-top s-mn-top" >
+        <div >
+            <table class="u-panel-table-top">
+                <tr class="u-panel-table-top-tr">
+                    <td>
+                        <a class="u-main-toolbar-btn <?php disable('SettingPageEdit');?>" id="add-workmode-list">
+                            <i class="icon-add icon-common"></i>
+                            <span class="pl-panel f-w0">新增</span>
+                        </a>
+                    </td>
+                    <td class="f-margin-left1">
+                        <a class="u-main-toolbar-btn <?php disable('SettingPageEdit');?>" id="edit-workmode-list">
+                            <i class="icon-edit icon-common"></i>
+                            <span class="pl-panel f-w0">修改</span>
+                        </a>
+                    </td>
+                    <td class="f-margin-left1">
+                        <a class="u-main-toolbar-btn <?php disable('SettingPageEdit');?>" id="del-workmode-list">
+                            <i class="icon-del icon-common"></i>
+                            <span class="pl-panel f-w0">删除</span>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="m-content-container">
+        <div class="m-content-item m-content-item-list">
+            <div class="u-ajax-table-container" id="u-ajax-table-container-workmode-list"></div>
+            <div class="u-page-toolbar" id="u-page-toolbar-workmode-list">
+                <?php Common::widget("Page")->pageToolbar();?>
+            </div>
+        </div>
+    </div>
+    <!--添加编辑白名单-->
+</div>
+
+</div>
+
+</div>
+<!--右侧栏-->
+</div>
+
+<?php Common::widget("Body")->commonFooter();?>

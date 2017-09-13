@@ -1,0 +1,381 @@
+<?php
+if(!defined("WOWOSTAR"))exit;
+Common::widget("Body")->commonHeader();
+Common::widget("Body")->commonTopMenu();
+?>
+<script>
+    window.LIMIT_CONTROLLER={
+        "EDIT":"<?php echo hasRight('RolePageEdit');?>",
+        "EDIT_ALL":"<?php echo hasRight('RolePageEditAll');?>",
+        "IS_ADMIN":"<?php echo isAdmin();?>"
+    };
+</script>
+<script src="/Resources/js/module/role.js"></script>
+<script src="/Resources/js/plugin/binfu/collapsePanel.js"></script>
+<script src="/Resources/js/plugin/layer/extend/layer.ext.js"></script>
+<div  class="m-content">
+<!--左侧栏-->
+<div class="g-sd s-sd" id="menu-container-role">
+</div>
+<!--左侧栏-->
+<!--右侧栏-->
+<div class="g-mn">
+<!--内部部分的头部工具-->
+<div class="m-mn-top s-mn-top">
+    <div >
+        <table class="u-panel-table-top" id="u-main-toolbar-role">
+            <tr class="u-panel-table-top-tr">
+                <td>
+                    <a class="u-main-toolbar-btn <?php disable('RolePageEditAll');?>" id="add-role">
+                        <i class="icon-add icon-common"></i>
+                        <span class="pl-panel f-w0">新增</span>
+                    </a>
+                </td>
+                <td class="f-margin-left1">
+                    <a class="u-main-toolbar-btn <?php disable('RolePageEdit');?>" id="edit-role">
+                        <i class="icon-edit icon-common"></i>
+                        <span class="pl-panel f-w0">修改</span>
+                    </a>
+                </td>
+                <td class="f-margin-left1">
+                    <a class="u-main-toolbar-btn <?php disable('RolePageEditAll');?>" id="del-role">
+                        <i class="icon-del icon-common"></i>
+                        <span class="pl-panel f-w0">删除</span>
+                    </a>
+                </td>
+            </tr>
+            <tr class="u-panel-table-top-tr">
+                <td>
+                    <a class="u-main-toolbar-btn <?php disable('RolePageEditAll');?>" id="import">
+                        <i class="icon-import "></i>
+                        <span class="f-w0">导入</span>
+                    </a>
+                </td>
+                <td class="f-margin-left1">
+                    <a class="u-main-toolbar-btn" id="export">
+                        <i class="icon-export"></i>
+                        <span class="f-w0">导出</span>
+                    </a>
+                </td>
+            </tr>
+            <tr class="u-panel-table-top-tr">
+                <td>
+                    <a class="u-main-toolbar-btn <?php disable('RolePageEditAll');?>" id="u-enable-role">
+                        <i class="icon-apply"></i>
+                        <span class="f-w0" id="u-btn-txt-frozen-role">启用</span>
+                    </a>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+<!--内部部分的头部工具-->
+<div class="m-content-container" id="m-content-container-role">
+    <!--角色管理主页面-->
+    <div class="m-content-item m-content-item-list">
+            <div class="u-ajax-table-container" id="u-ajax-table-container-role"></div>
+            <div class="u-page-toolbar" id="u-page-toolbar-role">
+                <?php Common::widget("Page")->pageToolbar();?>
+            </div>
+        <!--角色部门树-->
+        <div class="m-fixed s-fixed f-dn" id="u-role-dept-filter-tree-box" style="right: -235px;">
+            <div class="u-fixed-span1 s-fixed-span1">
+                <div class="u-fixed-span2">
+                    <i><img src="/Resources/images/version1/icon-fixed-img.png"></i>
+                    组织架构图
+                </div>
+            </div>
+            <div class="u-align-auto" id="u-role-dept-filter-tree"></div>
+        </div>
+        <div class="m-fixed s-fixed f-dn" id="u-role-dept-tree" style="right: -235px;">
+            <div class="u-fixed-span1 s-fixed-span1">
+                <div class="u-fixed-span2">
+                    <i><img src="/Resources/images/version1/icon-fixed-img.png"></i>
+                    组织架构图
+                </div>
+            </div>
+            <div class="u-align-auto" id="u-align-auto-role"></div>
+            <div class="u-fixed-btn">
+                <a id="u-div-hidden-role" class="u-upload-btn u-fixed-hidden">取 消</a>
+                <a id="u-div-down-role" class="u-upload-btn u-fixed-hover <?php disable('RolePageEditAll') ?>" >确 定</a>
+            </div>
+        </div>
+        <div class="u-icon-right-tree f-dn" id="u-expand-apply-role-tree"></div>
+    </div>
+    <!--角色管理主页面-->
+    <!--添加角色-->
+    <div class="m-content-item m-content-item-form-role-add f-dn" data-group="add-role">
+        <form id="u-form-add-role">
+            <div class="m-role-center m-content-item-wrapper">
+                <div class="m-panel s-panel">
+                    <div class="m-panel-title s-panel-title">
+                        <span class="u-panel-title-son" id="u-panel-title-role">新增角色</span>
+                        <b class="icon-tab-right"></b>
+                    </div>
+                    <div class="m-panel-body">
+                        <div class="m-panel-item s-panel-item" style="margin-top: -10px;">
+                            <ul class="u-sign">
+                                <li class="u-role-li1">
+                                    <label><span class="u-role-span1 f-w5">角色名称</span>
+                                        <input id="u-role-name" type="text" class="u-panel-input1 u-role-input1" required  maxlength="35" commonStr="commonStr">
+                                        <input type="hidden" name="JsStr">
+                                        <input type="hidden" name="RoleID" id="u-role-id" >
+                                    </label>
+                                </li>
+                                <li>
+                                    <label><span class="u-role-span1 f-w5">复制角色</span>
+                                        <input id="u-copy-role" class="u-panel-input1 u-role-input1"/></label>
+
+                                </li>
+                                <li>
+                                    <label><span class="u-role-span1 ">角色隶属组</span>
+                                        <input class="u-panel-input1 u-role-input1" id="u-belong-role" required readonly="readonly" name="ParentTypeID"/></label>
+
+                                </li>
+                                <li>
+                                    <label><span class="u-role-span1 ">新建角色组 </span>
+
+                                        <input type="text" class="u-panel-input1 u-role-input1" id="u-role-type-name"   maxlength="35" commonStr="commonStr"></label>
+
+                                </li>
+                                <li>
+                                    <label><span class="u-role-span1 f-w40" style="white-space: nowrap">备注</span>
+                                        <input id="u-role-remark" class="u-panel-input1 u-role-input1" type="text"  maxlength="250"/></label>
+                                </li>
+                                <li>
+                                    <span class="u-role-span1">角色等级</span>
+                                    <span class="u-role-span2"><label><input type="radio" class="f-input-align" name="level" value="1">一级</label></span>
+                                    <span class="u-role-span2"><label><input type="radio" class="f-input-align" name="level" value="2">二级</label></span>
+                                    <span class="u-role-span2"><label><input type="radio" class="f-input-align" name="level" value="3">三级</label></span>
+                                </li>
+                            </ul>
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-panel s-panel">
+                    <div class="m-panel-title s-panel-title">
+                        <span class="u-panel-title-son">权限设置</span>
+                        <b class="icon-tab-right"></b>
+                    </div>
+                    <div class="m-panel-body">
+                        <div class="m-panel-item s-panel-item special-container" style="margin-top: -10px;">
+                            <ul class="u-sign">
+                                <li>
+                                    <span class="u-role-sp-setting">特殊权限</span>
+                                    <div class="u-role-div1" id="1">
+                                        <ul class="f-lh30">
+                                            <li>
+                                                <span><label><input type="checkbox" class="special-input f-input-align" value="4">解密权限</label></span>
+                                                <span><label><input type="checkbox" class="special-input f-input-align" value="4096" >审批权限</label></span>
+                                                <span><label><input type="checkbox" class="special-input f-input-align" value="65536">委托权限</label></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="u-role-sp-setting">操作权限</span>
+                                    <div class="u-role-div1" id="2">
+                                        <ul class="f-lh30">
+                                            <li>
+                                                <span><label><input type="checkbox" class="special-input f-input-align" value="256">文件授权</label></span>
+                                                <span><label><input type="checkbox" class="special-input f-input-align" value="32">文件打印</label></span>
+                                                <span><label><input type="checkbox" class="special-input f-input-align" value="32768">文件外发</label></span>
+                                                <span><label><input type="checkbox" class="special-input f-input-align" value="2">截屏操作</label></span>
+                                                <span><label><input type="checkbox" class="special-input f-input-align" value="8192">使用截屏工具</label></span>
+                                                <span><label><input type="checkbox" class="special-input f-input-align" value="131072">落地加密</label></span>
+                                            </li>
+                                            <li>
+                                                <span><label><input type="checkbox" class="special-input f-input-align" value="1024">密码修改</label></span>
+                                                <span><label><input type="checkbox" class="special-input f-input-align" value="64">拷贝粘贴</label></span>
+                                                <span><label><input type="checkbox" class="special-input f-input-align" value="16384">离线解密</label></span>
+                                                <span><label><input type="checkbox" class="special-input f-input-align" value="512">隐藏右键菜单</label></span>
+                                                <span><label><input type="checkbox" class="special-input f-input-align" value="2048">不显示加密锁</label></span>
+                                                <span><label><input type="checkbox" class="special-input f-input-align" value="524288">U-Key授权</label></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </li>
+                                <li>
+                                    <span  class="u-role-sp-setting">备份权限</span>
+                                    <div class="u-role-div1" id="">
+                                        <ul class="f-lh30">
+                                            <li>
+                                                <span><label><input type="checkbox" class="special-input f-input-align" value="262144">查看删除备份</label></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span  class="u-role-sp-setting">邮件权限</span>
+                                    <div class="u-role-div1">
+                                        <ul class="f-lh30">
+                                            <li>
+                                                <span><label><input type="checkbox" class="special-input f-input-align" value="1048576">白名单设置</label></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="m-panel s-panel">
+                    <div class="m-panel-title s-panel-title">
+                        <span class="u-panel-title-son" >邮件权限</span>
+                        <b class="icon-tab-right"></b>
+                    </div>
+                    <div class="m-panel-body">
+                        <div class="m-panel-item s-panel-item special-container" style="margin-top: -10px;">
+                            <ul class="u-sign">
+                                <li>
+                                    <span class="u-business-span-width f-w3">白名单设置</span>
+                                    <label>
+                                        <input type="radio" name="white-list-enable" class="special-input f-input-align" value="1048576">
+                                        <span>启用 </span>
+                                    </label>
+                                    <label class="f-ml15">
+                                        <input type="radio" id="disable-white-list"  name="white-list-enable" class="f-input-align" value="0"/>
+                                        <span>禁用</span>
+                                    </label>
+                                </li>
+                                <li class="add-white-list-panel">
+                                    <label>
+                                        <span class="u-business-span-width ">邮件白名单</span>
+                                        <input type="text" class="u-panel-input1" value="">
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>-->
+                <div class="m-panel s-panel">
+                    <div class="m-panel-title s-panel-title">
+                        <span class="u-panel-title-son">应用权限</span>
+                        <b class="icon-tab-right"></b>
+                    </div>
+                    <div class="m-panel-body" id="u-get-setting">
+                        <ul class="u-role-ul">
+                            <li class="u-page-limit-li" data-level="1">
+                                <span><img src="/Resources/images/version2(9.9)/icon-role-show.png" class="f-input-align"><span class="f-fwb">允许查看</span></span>
+                            </li>
+                            <li class="f-margin-left30 u-page-limit-li" data-level="1">
+                                <span><label><input type="checkbox" class="f-input-align" name="UserPageView" data-group="user" data-action="view">用户管理</label></span>
+                                <span><label><input type="checkbox" class="f-input-align" name="StrategyPageView" data-group="strategy" data-action="view">策略管理</label></span>
+                                <span><label><input type="checkbox" class="f-input-align" name="BehaviorControlPageView" data-group="behavior" data-action="view">行为管控</label></span>
+                                <span><label> <input type="checkbox" class="f-input-align" name="RolePageView" data-group="role" data-action="view">角色管理</label></span>
+                                <span><label> <input type="checkbox" class="f-input-align" name="SettingPageView" data-group="setting" data-action="view">系统管理</label></span>
+                                <span><label><input type="checkbox" class="f-input-align" name="LogPageView" data-group="log" data-action="view">日志审计 (允许导出日志)</label></span>
+                            </li>
+                            <li class="u-page-limit-li" data-level="2">
+                                <span><img src="/Resources/images/version2(9.9)/icon-role-edit.png" class="f-input-align"><span class="f-fwb">允许修改</span></span>
+                            </li>
+                            <li class="f-margin-left30 u-page-limit-li" data-level="2">
+                                <span><label><input type="checkbox" class="f-input-align" name="UserPageEdit" data-group="user" data-action="edit">用户管理</label></span>
+                                <span><label><input type="checkbox" class="f-input-align" name="StrategyPageEdit" data-group="strategy" data-action="edit">策略管理</label></span>
+                                <span><label><input type="checkbox" class="f-input-align" name="BehaviorControlPageEdit" data-group="behavior" data-action="edit">行为管控</label></span>
+                                <span><label><input type="checkbox" class="f-input-align" name="RolePageEdit" data-group="role" data-action="edit">角色管理</label></span>
+                                <span><label><input type="checkbox" class="f-input-align" name="SettingPageEdit" data-group="setting" data-action="edit">系统管理</label></span>
+                                <!--<span><label><input type="checkbox" class="f-input-align" name="LogPageEdit" data-group="log" data-action="edit">日志审计</label></span>-->
+                            </li>
+                            <li class="u-page-limit-li" data-level="3">
+                                <span><img src="/Resources/images/version2(9.9)/icon-role-control.png" class="f-input-align"><span class="f-fwb">完全控制</span></span>
+                            </li>
+                            <li class="f-margin-left30 u-page-limit-li" data-level="3">
+                                <span><label><input type="checkbox" class="f-input-align" name="UserPageEditAll" data-group="user" data-action="all">用户管理</label></span>
+                                <span><label><input type="checkbox" class="f-input-align" name="StrategyPageEditAll" data-group="strategy" data-action="all">策略管理</label></span>
+                                <span><label><input type="checkbox" class="f-input-align" name="BehaviorControlPageEditAll" data-group="behavior" data-action="all">行为管控</label></span>
+                                <span><label> <input type="checkbox" class="f-input-align" name="RolePageEditAll" data-group="role" data-action="all">角色管理</label></span>
+                                <span><label> <input type="checkbox" class="f-input-align" name="SettingPageEditAll" data-group="setting" data-action="all">系统管理 (允许注册和卸载)</label></span>
+                                <!--<span><label><input type="checkbox" class="f-input-align" name="LogPageEditAll"  data-group="log" data-action="all">日志审计</label></span>-->
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--添加角色-->
+    <div class="m-btn f-dn">
+        <a class="u-btn-ok s-btn-ok <?php disable('RolePageEdit') ?>" id="save-role-form" data-disable="<?php disable('RolePageEdit') ?>">确 定</a>
+        <a class="u-btn-cancel s-btn-cancel">取 消</a>
+    </div>
+    <div class="m-content-item u-form-panel f-dn" ></div>
+</div>
+</div>
+<!--右侧栏--></div>
+
+
+
+<!--导入box-->
+<div id="upload-box" style="display:none">
+    <form action="/import_role.php" method="post" enctype="multipart/form-data" id="upload-form">
+        <div class="u-upload" id="import-box-title">
+            <span>
+            <img src="/Resources/images/version1/icon-upload.png" class="u-upload-img1"><span class="u-file-upload-tab">导 入</span>
+            </span>
+        </div>
+        <div class="u-file-upload" >
+            <div class="u-upload-file-name">
+                <ul class="u-upload-ul f-pl60" >
+                    <li>
+                        <span class="f-w0">导入归属：</span>
+                        <input type="text" class="u-upload-input u-padding sel-group import" required>
+                        <span></span>
+                    </li>
+                    <li id="sel-file-box">
+                        <span class="u-upload-file-title f-w5">文件名：</span>
+                        <input type="text" class="u-upload-input" id="import-file-name" readonly="readonly" style="margin-left: -1px;" required>
+                        <input type="button" value="浏 览" class="u-upload-btn-view" id="upload-view-btn">
+                        <input type="file" name="file" class="file" id="fileField" style="display: none"/>
+                    </li>
+                </ul>
+            </div>
+            <div class="u-upload-bottom">
+                <input type="button" id="import-btn" class="btn u-upload-btn u-upload-btn-submit" value="导 入"/>
+                <input type="button" value="取 消" class="u-upload-btn u-upload-btn-reset cancel-btn">
+            </div>
+
+        </div>
+
+    </form>
+</div>
+<!--/ 导入box-->
+
+<!--导出box-->
+<div id="export-box" style="display:none">
+    <form  method="post" enctype="multipart/form-data" id="export-form">
+        <div class="u-upload" id="export-box-title">
+            <span class="u-tab-top-upload">
+            <img src="/Resources/images/version1/icon_upload.png" class="u-upload-img1"><span class="u-file-upload-tab">导 出</span>
+            </span>
+        </div>
+        <div class="u-file-upload" >
+            <div class="u-upload-file-name">
+                <ul class="u-upload-ul">
+                    <li>
+                        <span style="margin-left: 90px;">导出归属：</span>
+                        <input type="text" class="u-upload-input u-padding sel-group export" required>
+                    </li>
+                    <li>
+                        <span class="f-description" style="margin-left: 90px;">备注：请选择需要导出的角色组</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="u-upload-bottom">
+                <input type="button" id="export-btn" class="btn u-upload-btn u-upload-btn-submit" value="导 出"/>
+                <input type="button" value="取 消" class="u-upload-btn u-upload-btn-reset cancel-btn">
+            </div>
+        </div>
+
+    </form>
+</div>
+<!--/ 导出box-->
+<?php
+Common::widget("Body")->commonFooter();
+?>

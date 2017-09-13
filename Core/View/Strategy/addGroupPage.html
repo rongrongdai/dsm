@@ -1,0 +1,59 @@
+<div class="m-content-item-wrapper">
+    <!--常规设置-->
+    <div class="s-panel u-panel">
+        <div class="u-panel-title s-panel-title">
+            <span class="u-panel-title-son z-expanded">常规设置</span>
+            <b class="icon-tab-right"></b>
+        </div>
+        <div class="u-panel-body">
+            <div class="u-panel-item1 s-panel-item1">
+                <ul class="u-add-user-dept-ul">
+                    <li>
+                        <label>
+                            <span class="u-add-user-dept-li f-word-margin">策略名称</span>
+                            <input type="text" class="u-panel-input" required maxlength="35" commonStr="commonStr">
+                        </label>
+                    </li>
+                    <li><label><span class="u-add-user-dept-li f-w12">备注:</span>
+                        <input class="u-panel-input"/></label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--成员设置-->
+    </div>
+    <div class="s-panel u-panel">
+        <div class="u-panel-title s-panel-title">
+            <span class="u-panel-title-son z-expanded">添加策略</span>
+            <b class="icon-tab-right"></b>
+        </div>
+        <div class="u-panel-body">
+            <div class="u-panel-item1 s-panel-item1">
+                <ul class="u-add-user-dept-ul">
+                    <li>
+                        <div class="u-panel-item1">
+                            <div class="u-add-doing-user">
+                                <div style="display: inline-block;">
+                                    <span id="u-should-add-user">可添加策略</span>
+                                </div>
+                                <select class="u-panel-area1" multiple="multiple" size="2" ></select>
+                            </div>
+                            <div class="u-add-opt">
+                                <a class="s-img1 u-img1 u-move-user-right"></a>
+                                <a class="s-img2 u-img2 u-move-user-left"></a>
+                            </div>
+                            <div class="u-add-did-user">
+                                <span>已添加策略</span>
+                                <select multiple="multiple" size="2" class="u-panel-area1" ></select>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="m-btn">
+    <a class="u-btn-ok s-btn-ok <?php disable('BehaviorControlPageEdit'); ?>">确 定</a>
+    <a class="u-btn-cancel s-btn-cancel">取 消</a>
+</div>
